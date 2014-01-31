@@ -42,7 +42,7 @@ get_header(); ?>
 					 * the loop back to the beginning that way we can run
 					 * the loop properly, in full.
 					 */
-					rewind_posts(); /*reymond was here*/
+					rewind_posts();
 
 					// Start the Loop.
 					while ( have_posts() ) : the_post();
