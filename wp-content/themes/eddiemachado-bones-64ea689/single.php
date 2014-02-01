@@ -21,6 +21,10 @@
 
 								<section class="entry-content clearfix" itemprop="articleBody">
 									<?php the_content(); ?>
+									<p><?php the_field('name'); ?></p>
+									<p><?php the_field('address'); ?></p>
+									<?php $image = wp_get_attachment_image_src(get_field('picture'), 'full'); ?>
+<img src="<?php echo $image[0]; ?>" alt="<?php echo get_the_title(get_field('picture')) ?>" />
 								</section>
 
 								<footer class="article-footer">
