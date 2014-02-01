@@ -179,7 +179,7 @@ function bones_wpsearch($form) {
 	return $form;
 } // don't remove this bracket!
 
-/*
+
 add_action( 'init', 'create_post_type' );
 function create_post_type() {
 	register_post_type( 'resources',
@@ -197,42 +197,16 @@ function create_post_type() {
                 'search_items' => 'Search Resources',
                 'not_found' => 'No Resources found',
                 'not_found_in_trash' => 'No Resources found in Trash',
-                'parent' => 'Parent Movie Review'
+                'parent' => 'Parent Resource'
 			),
 		'public' => true,
 		'menu_position' => 15,
-        'supports' => array( 'title', 'comments', 'editor', 'thumbnail', 'custom-fields' ),
+        'supports' => array( 'title', 'comments', /*'editor',*/ 'thumbnail', /*'custom-fields'*/ ),
 		'has_archive' => true,
-		'rewrite' => array('slug' => 'resources')
+		/*'rewrite' => array('slug' => 'resources')*/
 		)
 	);
 }
 
-function my_admin() {
-    add_meta_box( 'resources_meta_box',
-        'Resource Details',
-        'display_resources_meta_box',
-        'resources', 'normal', 'high'
-    );
-}
-
-function display_resources_meta_box( $resources ) {
-    ?>
-    <table>
-        <tr>
-            <td style="width: 100%">Org Name</td>
-            <td><input type="text" size="80" name="resource_name" value=""/></td>
-        </tr>
-        <tr>
-            <td style="width: 150px">Address</td>
-            <td>
-                <select style="width: 100px" name="resource_address">
-                </select>
-            </td>
-        </tr>
-    </table>
-    <?php
-}
-*/
 
 ?>
