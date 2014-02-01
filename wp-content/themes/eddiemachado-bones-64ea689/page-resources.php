@@ -29,16 +29,35 @@ Template Name: Resources Page
 
 								<section class="entry-content clearfix" itemprop="articleBody">
 									<?php the_content(); ?>
-									<h3 class="pad"><?php the_sub_field("title"); ?></h3>
-						<div class="box-wrapper">
 
-							<?php ?>
+									<!-- TO GET DIFFERENT POSTS, CHANGE SECOND ARGUEMNT -->
+									<!-- TO DO ~~~ REPLACE WITH VAR PULLING ALL POSTS WITH THAT CPT ~~~ -->
 
-							
+									<p><?php the_field('name', 43); ?></p>
+									<p><?php the_field('address', 43); ?></p>
+									<?php $image = wp_get_attachment_image_src(get_field('picture', 43), 'full'); ?>
+									<img src="<?php echo $image[0]; ?>" alt="<?php echo get_the_title(get_field('picture', 43)) ?>" />
 
-						</div>
+									<!-- PRINTS THE URL FOR EVERY CUSTOM POST TYPE WITH NAME RESOURCE -->
+
+									<?php
+										$type = 'resources';
+										$args=array(
+										  'post_type' => $type,
+										  'post_status' => 'publish',
+										  'posts_per_page' => -1,
+										  'caller_get_posts'=> 1);
+										$my_query = new WP_Query($args);
+										if( $my_query->have_posts() ) {
+										  while ($my_query->have_posts()) : $my_query->the_post(); ?>
+										    <p><a href="<?php the_permalink() ?>" rel="bookmark" title="Permanent Link to <?php the_title_attribute(); ?>"><?php the_title(); ?></a></p>
+										    <?php
+										  endwhile;
+										}
+										wp_reset_query();  // Restore global post data stomped by the_post().
+									?>
+
 								</section>
-
 								<footer class="article-footer">
 									<p class="clearfix"><?php the_tags( '<span class="tags">' . __( 'Tags:', 'bonestheme' ) . '</span> ', ', ', '' ); ?></p>
 
