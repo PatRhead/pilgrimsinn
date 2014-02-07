@@ -35,7 +35,6 @@ Template Name: Custom Page Example
 
 								</footer>
 
-								<?php comments_template(); ?>
 
 							</article>
 

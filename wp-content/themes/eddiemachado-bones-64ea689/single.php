@@ -32,7 +32,6 @@
 
 								</footer>
 
-								<?php comments_template(); ?>
 
 							</article>
 
@@ -55,8 +54,6 @@
 						<?php endif; ?>
 
 					</div>
-
-					<?php get_sidebar(); ?>
 
 				</div>
 
