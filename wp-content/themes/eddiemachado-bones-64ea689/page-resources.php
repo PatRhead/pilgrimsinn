@@ -62,9 +62,6 @@ Template Name: Resources Page
 									<p class="clearfix"><?php the_tags( '<span class="tags">' . __( 'Tags:', 'bonestheme' ) . '</span> ', ', ', '' ); ?></p>
 
 								</footer>
-
-								<?php comments_template(); ?>
-
 							</article>
 
 							<?php endwhile; else : ?>
