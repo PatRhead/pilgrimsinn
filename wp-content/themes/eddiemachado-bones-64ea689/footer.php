@@ -3,10 +3,10 @@
 				<div id="inner-footer" class="wrap clearfix">
 
 					<nav role="navigation">
-							<?php bones_footer_links(); ?>
+						<?php bones_main_nav(); ?>
 					</nav>
-
-					<p class="source-org copyright">&copy; <?php echo date('Y'); ?> <?php bloginfo( 'name' ); ?>.</p>
+					<div id="footer-content">This is content that will be in the footer.</div>
+		<!--			<p class="source-org copyright">&copy; <?php echo date('Y'); ?> <?php bloginfo( 'name' ); ?>.</p> -->
 
 				</div>
 
@@ -19,4 +19,4 @@
 
 	</body>
 
-</html>
+	</html>
