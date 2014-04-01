@@ -181,6 +181,7 @@ HEADER STYLES
 			}
 		}
 
+<<<<<<< HEAD
 	}
 }
 
@@ -189,6 +190,8 @@ HEADER STYLES
 	padding-top:15px;
 }
 
+=======
+>>>>>>> patrick
 #logo {}
 
 /*********************
@@ -208,6 +211,10 @@ and more scalable.
 .nav {
 	border: 1px solid #ccc;
 	border-bottom: 0;
+	display: inline-block;
+	position: relative;
+	float: right;
+
 
 	li {
 
@@ -287,6 +294,7 @@ POSTS & CONTENT STYLES
 	margin-top:0px;
 }
 
+<<<<<<< HEAD
 #inner-footer {
 	display:inline-block;
 	margin-top:35px;
@@ -327,10 +335,51 @@ POSTS & CONTENT STYLES
 	/* post meta */
 	.byline {
 		color: #999;
+=======
+.hentry {
+
+	header {}
+
+	footer {}
+
+	} /* end .hentry */
+
+	.single-title,
+	.page-title {}
+
+	.single-title {}
+
+	.page-title {}
+
+	.archive-title { }
+
+	/* want to style individual post classes? Booya! */
+	.post-id {}         /* post by id (i.e. post-3) */
+	.post {}            /* general post style */
+	.page {}            /* general article on a page style */
+	.attachment {}      /* general style on an attatchment */
+	.sticky {}          /* sticky post style */
+	.hentry {}          /* hentry class */
+	.category-slug {}   /* style by category (i.e. category-videos) */
+	.tag-slug {}        /* style by tag (i.e. tag-news) */
+
+	/* post meta */
+	.byline {
+		color: #999;
 
 		time {}
 	}
 
+	/* entry content */
+	.entry-content {
+
+		p {}
+>>>>>>> patrick
+
+		time {}
+	}
+
+<<<<<<< HEAD
 	/* entry content */
 	.entry-content {
 
@@ -340,17 +389,33 @@ POSTS & CONTENT STYLES
 		ul, ol, table, dl {}
 
 		ul, ol {
+=======
+		ul, ol, table, dl {}
+
+		ul, ol {
 
 			li {}
 
 		}
 
 		ul {
+>>>>>>> patrick
 
 			li {}
 
 		}
 
+<<<<<<< HEAD
+		ul {
+=======
+		ol {
+>>>>>>> patrick
+
+			li {}
+
+		}
+
+<<<<<<< HEAD
 		ol {
 
 			li {}
@@ -374,6 +439,25 @@ POSTS & CONTENT STYLES
 			margin-bottom: 1.5em;
 		}
 
+=======
+		blockquote {
+
+			&:before {}
+
+		}
+
+		dl {}
+
+		dt {}
+
+		dd {
+			margin-left: 0;
+			font-size: 0.9em;
+			color: #787878;
+			margin-bottom: 1.5em;
+		}
+
+>>>>>>> patrick
 		img {
 			margin: 0 0 1.5em 0;
 			max-width: 100%;
@@ -431,6 +515,7 @@ POSTS & CONTENT STYLES
 						a {}
 
 						img {}
+<<<<<<< HEAD
 
 					}
 
@@ -443,6 +528,20 @@ POSTS & CONTENT STYLES
 					/* gallery caption styles */
 					.gallery-caption {}
 
+=======
+
+					}
+
+					dt {}
+
+					dd {}
+
+					} /* end .gallery */
+
+					/* gallery caption styles */
+					.gallery-caption {}
+
+>>>>>>> patrick
 					.size-full {}
 					.size-large {}
 					.size-medium {}
@@ -585,10 +684,17 @@ COMMENT STYLES
 		.alt {}
 		.odd {
 			background: #eee;
+<<<<<<< HEAD
 		}
 		.even {
 			background: #fefefe;
 		}
+=======
+		}
+		.even {
+			background: #fefefe;
+		}
+>>>>>>> patrick
 		.parent {}
 		.comment {}
 		.children {}
@@ -811,6 +917,7 @@ FOOTER STYLES
 .footer {
 	clear: both;
 	background-color: #93BFCE;
+<<<<<<< HEAD
 	text-align: center;
 
 	.nav {
@@ -835,6 +942,8 @@ FOOTER STYLES
 			}
 		}
 	}
+=======
+>>>>>>> patrick
 }
 
 
@@ -883,7 +992,15 @@ SLIDER STYLES
 		}
 
 		} /* end .footer-links */
+<<<<<<< HEAD
+=======
 
+>>>>>>> patrick
 
 		.copyright {}
+
+<<<<<<< HEAD
+		.copyright {}
+=======
+>>>>>>> patrick
 
