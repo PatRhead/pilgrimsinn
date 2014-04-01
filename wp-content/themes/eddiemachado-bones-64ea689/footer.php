@@ -1,16 +1,16 @@
-			<footer class="footer" role="contentinfo">
+	<footer class="footer" role="contentinfo">
 
-				<div id="inner-footer" class="wrap clearfix">
+		<div id="inner-footer" class="wrap clearfix">
 
-					<nav role="navigation">
-							<?php bones_footer_links(); ?>
-					</nav>
+			<nav role="navigation">
+			<?php bones_footer_links(); ?>
+			</nav>
+			<div id="footer-content">This is content that will be in the footer.</div>
+			<!--<p class="source-org copyright">&copy; <?php echo date('Y'); ?> <?php bloginfo( 'name' ); ?>.</p> -->
 
-					<p class="source-org copyright">&copy; <?php echo date('Y'); ?> <?php bloginfo( 'name' ); ?>.</p>
+		</div>
 
-				</div>
-
-			</footer>
+	</footer>
 
 		</div>
 
