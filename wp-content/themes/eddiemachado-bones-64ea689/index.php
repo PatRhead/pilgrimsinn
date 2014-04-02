@@ -30,9 +30,9 @@
 					$video_url_fixed = str_replace("/watch?v=", "/embed/", $video_url_fixed);
 					?>
 
-					<?php echo $video_info['title']; ?>
+					<h1><?php echo $video_info['title']; ?></h1>
 					<br />
-					<?php echo $video_info['sub_title']; ?>
+					<h3><?php echo $video_info['sub_title']; ?></h3>
 					<br />
 					<?php echo $video_info['content']; ?>
 					<br />

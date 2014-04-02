@@ -108,6 +108,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
 	font-family: $sans-serif;
 	text-rendering: optimizelegibility;
 	font-weight: 500;
+
 	/*
 	if you're going to use webfonts, be sure to check your weights
 	http://css-tricks.com/watch-your-font-weight/
@@ -122,6 +123,11 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
 h1, .h1 {
 	font-size: 2.5em;
 	line-height: 1.333em;
+	color: #9DB269;
+	padding-top:40px;
+	padding-left: 40px;
+	font-weight: 200px;
+	margin: 0px;
 }
 
 h2, .h2 {
@@ -132,6 +138,9 @@ h2, .h2 {
 
 h3, .h3 {
 	font-size: 1.125em;
+	color: #93BFCE;
+	paddin-left: 40px;
+	padding-left: 40px;
 }
 
 h4, .h4 {
@@ -150,7 +159,40 @@ h5, .h5 {
 HEADER STYLES
 *********************/
 
-.header {}
+
+.header {
+	height:113px;
+	font-family:'Lato', sans-serif;
+	font-weight:300;
+	nav {
+		display: inline-block;
+		position: relative;
+		float: right;
+		text-align: center;
+	}
+	.nav {
+		background-color: transparent;
+		padding-top: 27px;
+
+		li a {
+			background-color:transparent;
+			color:#93BFCE;
+			font-size: 28px;
+
+			&:hover, &:focus{
+				color:#9DB269;
+				background-color: transparent;
+
+			}
+		}
+
+	}
+}
+
+#inner-header {
+	max-width:990px;
+	padding-top:15px;
+}
 
 #logo {}
 
