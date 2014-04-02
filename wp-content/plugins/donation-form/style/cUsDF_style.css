@@ -18,7 +18,7 @@ div.plugin_wrap .cUsDF_header .social_shares{position: absolute;right: 40px;top:
 div.plugin_wrap .cUsDF_header .social_shares a{opacity: 0.6;}
 div.plugin_wrap .cUsDF_header .social_shares a:hover{opacity: 1.0;}
 
-div.plugin_wrap .cUsDF_formset{background:#d8d8d8;border-radius:0px;overflow:hidden;width:99.9%;}
+div.plugin_wrap .cUsDF_formset{ background:#d8d8d8;border-radius:0px;overflow:hidden;width:99.9%; position:relative; }
 div.plugin_wrap .cUsDF_formset .loadingMessage{width:245px;height:20px; text-align:center;background:url(images/loading.gif) top center no-repeat;display:none;margin:10px 0px;}
 div.plugin_wrap .cUsDF_formset h1,
 div.plugin_wrap .cUsDF_formset h2,
@@ -396,3 +396,9 @@ HOME PAGE LAYOUT*/
 .why-contactuscom{margin:10px auto;overflow:hidden;background:#f2f2f2;border-radius: 7px;padding:5px; }
 .why-contactuscom .panel{box-shadow:0 1px 2px 0 #999;font-size:12px;background-color:#FFF;min-height:252px;border-radius:8px;text-align:center;overflow:hidden;position:relative;margin:5px 1.2% 5px 1.2%;padding:15px}
 .why-contactuscom h4.heading{color:#0d203b;font-size:14px;}
+
+/* preloader layer */
+div.plugin_wrap .cUsDF_formset > .cUsDF_preloadbox{background:#fff;width:100%;height:100%;position: absolute;top: 0;left: 0;z-index: 9999;opacity: 1;}
+div.plugin_wrap .cUsDF_formset > .cUsDF_preloadbox .cUsDF_loadmessage{background:url(images/contactus-logo.png) top center no-repeat;width:250px;height:100px;position: absolute;top: 130px;left: 37%;}
+div.plugin_wrap .cUsDF_formset > .cUsDF_preloadbox .cUsDF_loadmessage > .loading{background:url(images/loading.gif) top center no-repeat;width:250px;height:20px;position: absolute;bottom: 0;}
+

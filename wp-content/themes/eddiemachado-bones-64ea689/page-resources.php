@@ -55,9 +55,6 @@ Template Name: Resources Page
 						endwhile;
 					}
 										wp_reset_query();  // Restore global post data stomped by the_post(). ?>
-										<style type="text/css">
-
-										</style>
 										<h3>Upcomng events</h3>
 										<?php
 										echo do_shortcode('[add_eventon event_count="3" month_incre="+1" fixed_year="2014" fixed_month="3" ]');

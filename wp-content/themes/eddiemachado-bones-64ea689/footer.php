@@ -2,35 +2,21 @@
 
 		<div id="inner-footer" class="wrap clearfix">
 
-<<<<<<< HEAD
 			<nav role="navigation">
-			<?php bones_footer_links(); ?>
+				<?php bones_main_nav(); ?>
 			</nav>
 			<div id="footer-content">This is content that will be in the footer.</div>
 			<!--<p class="source-org copyright">&copy; <?php echo date('Y'); ?> <?php bloginfo( 'name' ); ?>.</p> -->
 
 		</div>
-=======
-					<nav role="navigation">
-						<?php bones_main_nav(); ?>
-					</nav>
-					<div id="footer-content">This is content that will be in the footer.</div>
-		<!--			<p class="source-org copyright">&copy; <?php echo date('Y'); ?> <?php bloginfo( 'name' ); ?>.</p> -->
-
-				</div>
->>>>>>> patrick
 
 	</footer>
 
-		</div>
+</div>
 
-		<?php // all js scripts are loaded in library/bones.php ?>
-		<?php wp_footer(); ?>
+<?php // all js scripts are loaded in library/bones.php ?>
+<?php wp_footer(); ?>
 
-	</body>
+</body>
 
-<<<<<<< HEAD
 </html>
-=======
-	</html>
->>>>>>> patrick

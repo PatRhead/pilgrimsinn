@@ -1,4 +1,5 @@
 <?php 
+
 function cff_menu() {
     add_menu_page(
         '',
@@ -21,14 +22,15 @@ add_action('admin_menu', 'cff_menu');
 function cff_styling_menu() {
     add_submenu_page(
         'cff-top',
-        'Layout &amp; Style',
-        'Layout &amp; Style',
+        'Customize',
+        'Customize',
         'manage_options',
         'cff-style',
         'cff_style_page'
     );
 }
 add_action('admin_menu', 'cff_styling_menu');
+
 //Create Settings page
 function cff_settings_page() {
     //Declare variables for fields
@@ -42,6 +44,7 @@ function cff_settings_page() {
     $cff_cache_time         = 'cff_cache_time';
     $cff_cache_time_unit    = 'cff_cache_time_unit';
     $cff_locale             = 'cff_locale';
+    $cff_ajax               = 'cff_ajax';
     // Read in existing option value from database
     $access_token_val = get_option( $access_token );
     $page_id_val = get_option( $page_id );
@@ -64,6 +67,7 @@ function cff_settings_page() {
         $cff_cache_time_val = $_POST[ $cff_cache_time ];
         $cff_cache_time_unit_val = $_POST[ $cff_cache_time_unit ];
         $cff_locale_val = $_POST[ $cff_locale ];
+        $cff_ajax_val = $_POST[ $cff_ajax ];
         // Save the posted value in the database
         update_option( $access_token, $access_token_val );
         update_option( $page_id, $page_id_val );
@@ -74,6 +78,7 @@ function cff_settings_page() {
         update_option( $cff_cache_time, $cff_cache_time_val );
         update_option( $cff_cache_time_unit, $cff_cache_time_unit_val );
         update_option( $cff_locale, $cff_locale_val );
+        update_option( $cff_ajax, $cff_ajax_val );
         
         //Delete the transient for the main page ID
         delete_transient( 'cff_posts_json_' .$page_id_val );
@@ -104,8 +109,18 @@ function cff_settings_page() {
  
     <div id="cff-admin" class="wrap">
         <div id="header">
-            <h1><?php _e('Custom Facebook Feed Settings'); ?></h1>
+            <h2><?php _e('Custom Facebook Feed Settings'); ?></h2>
         </div>
+
+        <?php
+        $active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : 'configuration';
+        ?>
+        <h2 class="nav-tab-wrapper">
+            <a href="?page=cff-top&amp;tab=configuration" class="nav-tab <?php echo $active_tab == 'configuration' ? 'nav-tab-active' : ''; ?>"><?php _e('Configuration'); ?></a>
+                <a href="?page=cff-top&amp;tab=support" class="nav-tab <?php echo $active_tab == 'support' ? 'nav-tab-active' : ''; ?>"><?php _e('Support'); ?></a>
+        </h2>
+
+        <?php if( $active_tab == 'configuration' ) { //Start Extensions tab ?>
 
         <form name="form1" method="post" action="">
             <input type="hidden" name="<?php echo $hidden_field_name; ?>" value="Y">
@@ -121,22 +136,22 @@ function cff_settings_page() {
                             &nbsp;<a class="cff-tooltip-link" href="JavaScript:void(0);"><?php _e("How do I get an Access Token?"); ?></a>
                             <br /><i style="color: #666; font-size: 11px;">Eg. 1234567890123|ABC2fvp5h9tJe4-5-AbC123.</i>
 
-                            <div class="cff-profile-error cff-access-token">
+                            <div class="cff-notice cff-profile-error cff-access-token">
                                 <?php _e("<p>This doesn't appear to be an Access Token. Please be sure that you didn't enter your App Secret instead of your Access Token.<br />Your App ID and App Secret are used to obtain your Access Token; simply paste them into the fields in the last step of the <a href='http://smashballoon.com/custom-facebook-feed/access-token/' target='_blank'>Access Token instructions</a> and click '<b>Get my Access Token</b>'.</p>"); ?>
                             </div>
 
-                            <div class="cff-tooltip">
+                            <div class="cff-tooltip cff-more-info">
                                 <?php _e("<p>In order to use the plugin, Facebook requires you to obtain an access token to verify that you're authorized to access their data.  Don't worry though, this is really easy to do.  Just follow these <a href='http://smashballoon.com/custom-facebook-feed/access-token/' target='_blank'>step-by-step instructions</a>.</p><p><b>Already have an App ID and App Secret?</b> Simply paste them into the fields in the last step of the <a href='http://smashballoon.com/custom-facebook-feed/access-token/' target='_blank'>Access Token instructions</a> and click '<b>Get my Access Token</b>'.</p>"); ?>
                             </div>
                         </td>
                     </tr>
                     <tr valign="top">
-                        <th scope="row"><?php _e('Facebook Page ID (or slug)'); ?><br /><i style="color: #666; font-size: 11px;"><?php _e('(This can usually be found in your <a class="cff-tooltip-link" href="JavaScript:void(0);">Facebook page URL</a>)</i>'); ?></th>
+                        <th scope="row"><?php _e('Facebook Page ID (or slug)'); ?></th>
                         <td>
                             <input name="cff_page_id" id="cff_page_id" type="text" value="<?php esc_attr_e( $page_id_val ); ?>" size="60" />
                             &nbsp;<a class="cff-tooltip-link" href="JavaScript:void(0);"><?php _e('What\'s my Page ID?'); ?></a>
                             <br /><i style="color: #666; font-size: 11px;">Eg. 1234567890123 or smashballoon</i>
-                            <div class="cff-tooltip">
+                            <div class="cff-tooltip cff-more-info">
                                 <ul>
                                     <li><?php _e('If you have a Facebook <b>page</b> with a URL like this: <code>https://www.facebook.com/your_page_name</code> then the Page ID is just <b>your_page_name</b>. If your page URL is structured like this: <code>https://www.facebook.com/pages/your_page_name/123654123654123</code> then the Page ID is actually the number at the end, so in this case <b>123654123654123</b>.</li>'); ?>
                                     <li><?php _e('If you have a Facebook <b>group</b> then use <a href="http://lookup-id.com/" target="_blank" title="Find my ID">this tool</a> to find your ID.'); ?></li>
@@ -154,7 +169,7 @@ function cff_settings_page() {
                                 <option value="group" <?php if($cff_page_type_val == "group") echo 'selected="selected"' ?> ><?php _e('Group'); ?></option>
                                 <option value="profile" <?php if($cff_page_type_val == "profile") echo 'selected="selected"' ?> ><?php _e('Profile'); ?></option>
                             </select>
-                            <div class="cff-profile-error cff-page-type">
+                            <div class="cff-notice cff-profile-error cff-page-type">
                                 <?php _e("<p>Due to Facebook's privacy policy you're not able to display posts from a personal profile, only from a public page or group.</p><p>If you're using a profile to represent a business, organization, product, public figure or the like, then Facebook recommends <a href='http://www.facebook.com/help/175644189234902/' target='_blank'>converting your profile to a page</a>. There are many advantages to using pages over profiles, and once you've converted then the plugin will be able to successfully retrieve and display all of your posts.</p>"); ?>
                             </div>
                         </td>
@@ -169,7 +184,7 @@ function cff_settings_page() {
                                 <option value="onlyothers" <?php if($cff_show_others_val == 'onlyothers') echo 'selected="selected"' ?> ><?php _e('Only other people'); ?></option>
                             </select>
 
-                            <p id="cff-others-only" style="font-size: 12px;"><b>Note:</b> Only displaying posts by other people works by retrieving your posts from Facebook and then filtering out the posts by the page owner. If this option doesn't display many posts then you can retrieve more by setting the post limit option (below) to a higher number.</p>
+                            <p id="cff-others-only" style="font-size: 12px;"><b>Note:</b> Only displaying posts by other people works by retrieving your posts from Facebook and then filtering out the posts by the page owner. If this option doesn't display many posts then you can retrieve more by setting the post limit option (below) to a higher number (a number 15-20 greater than the number of posts you want to display).</p>
 
                         </td>
                     </tr>
@@ -182,11 +197,11 @@ function cff_settings_page() {
                         </td>
                     </tr>
                     <tr valign="top">
-                        <th scope="row"><?php _e('Alter the post limit'); ?></th>
+                        <th scope="row"><?php _e('Change the post limit'); ?></th>
                         <td>
                             <input name="cff_post_limit" type="text" value="<?php esc_attr_e( $cff_post_limit_val ); ?>" size="4" />
-                            <i style="color: #666; font-size: 11px;">Eg. 50</i> <a class="cff-tooltip-link bump-left" href="JavaScript:void(0);"><?php _e('What does this mean?'); ?></a>
-                            <p class="cff-tooltip"><?php _e('By default the Facebook API only returns your latest 25 posts. If you would like to retrieve more than 25 posts then you can increase the limit by specifying a higher value here. However, the more posts you request the slower the page load time may be when the plugin needs to check Facebook for new posts. Similarly, if you only intend to retrieve a few posts then you may wish to set a lower post limit here so that you aren\'t retrieving more posts than necessary. It\'s best to set this higher than the actual number of posts you want to display as some posts may be filtered out.'); ?></p>
+                            <i style="color: #666; font-size: 11px;">Eg. 50</i> <a class="cff-tooltip-link" href="JavaScript:void(0);"><?php _e('What does this mean?'); ?></a>
+                            <p class="cff-tooltip cff-more-info"><?php _e("Most users don't need to change the post lmit. The 'limit' is the number of posts retrieved from the Facebook API. By default the plugin retrieves 7 posts more from the Facebook API than you specify in the 'Number of posts to display' field above, as some posts are filtered out. You can alter how many posts are retrieved by manually setting this value. If you choose to retrieve a high number of posts then it will take longer for Facebook to return the posts when the plugin checks for new ones."); ?></p>
                         </td>
                     </tr>
                     <tr valign="top">
@@ -198,8 +213,8 @@ function cff_settings_page() {
                                 <option value="hours" <?php if($cff_cache_time_unit_val == "hours") echo 'selected="selected"' ?> ><?php _e('Hours'); ?></option>
                                 <option value="days" <?php if($cff_cache_time_unit_val == "days") echo 'selected="selected"' ?> ><?php _e('Days'); ?></option>
                             </select>
-                            <a class="cff-tooltip-link bump-left" href="JavaScript:void(0);"><?php _e('What does this mean?'); ?></a>
-                            <p class="cff-tooltip"><?php _e('Your Facebook posts and comments data is temporarily cached by the plugin in your WordPress database. You can choose how long this data should be cached for. If you set the time to 60 minutes then the plugin will clear the cached data after that length of time, and the next time the page is viewed it will check for new data.'); ?></p>
+                            <a class="cff-tooltip-link" href="JavaScript:void(0);"><?php _e('What does this mean?'); ?></a>
+                            <p class="cff-tooltip cff-more-info"><?php _e('Your Facebook posts and comments data is temporarily cached by the plugin in your WordPress database. You can choose how long this data should be cached for. If you set the time to 60 minutes then the plugin will clear the cached data after that length of time, and the next time the page is viewed it will check for new data.'); ?></p>
                         </td>
                     </tr>
 
@@ -288,52 +303,73 @@ function cff_settings_page() {
                             <i style="color: #666; font-size: 11px;"><?php _e('Select a language'); ?></i>
                         </td>
                     </tr>
+
+                    <tr>
+                        <th><label for="cff_ajax" class="bump-left"><?php _e('Loading the feed via Ajax?'); ?></label></th>
+                        <td>
+                            <input name="cff_ajax" type="checkbox" id="cff_ajax" <?php if($cff_ajax_val == true) echo "checked"; ?> />
+                            <label for="cff_ajax"><?php _e('Yes'); ?></label>
+                            <a class="cff-tooltip-link" href="JavaScript:void(0);"><?php _e('What does this mean?'); ?></a>
+                            <p class="cff-tooltip cff-more-info"><?php _e('Some modern WordPress themes use Ajax to load content into the page after it has loaded. If your theme uses Ajax to load the Custom Facebook Feed content into the page then check this box. If you are not sure then please check with the theme author.'); ?></p>
+                        </td>
+                    </tr>
                     
                 </tbody>
             </table>
             <?php submit_button(); ?>
+            <p>Having trouble using the plugin? Check out the <a href='admin.php?page=cff-top&amp;tab=support'>Support</a> tab.</p>
         </form>
-
-        <p class="admin-notice"><a href="http://smashballoon.com/custom-facebook-feed/" target="_blank">Users of this free plugin can now get <b><u>10% off</u></b> The Custom Facebook Feed Pro. Just use the coupon code <b><u>FREEUSER</u></b></a></p>
-        
         <hr />
         <h3><?php _e('Displaying your Feed'); ?></h3>
-        <p><?php _e('Copy and paste this shortcode directly into the page, post or widget where you\'d like the feed to show up:'); ?></p>
-        <input type="text" value="[custom-facebook-feed]" size="22" readonly="readonly" onclick="this.focus();this.select()" id="system-info-textarea" name="edd-sysinfo" title="<?php _e('To copy, click the field then press Ctrl + C (PC) or Cmd + C (Mac).'); ?>" />
+        <p><?php _e("Copy and paste this shortcode directly into the page, post or widget where you'd like the feed to show up:"); ?></p>
+        <input type="text" value="[custom-facebook-feed]" size="22" readonly="readonly" onclick="this.focus();this.select()" title="<?php _e('To copy, click the field then press Ctrl + C (PC) or Cmd + C (Mac).'); ?>" />
         <hr />
         <h3><?php _e('Customizing your Feed'); ?></h3>
-        <p><?php _e("Use the <a href='admin.php?page=cff-style'>Layout &amp; Style</a> page to customize your feed. If you're displaying multiple feeds then you can override your settings directly in the shortcode like so:"); ?></p>
+        <p><?php _e("Use the <a href='admin.php?page=cff-style'>Customize</a> page to customize your feed. If you're displaying multiple feeds then you can override your settings directly in the shortcode like so:"); ?></p>
         <p>[custom-facebook-feed <b><span style='color: green;'>id=some-other-page-id num=3 height=500px</span></b>]</p>
         <p><a href="http://smashballoon.com/custom-facebook-feed/docs/shortcodes/" target="_blank"><?php _e('See a full list of shortcode options'); ?></a></p>
-        <hr />
-        <h3><?php _e('Plugin Support'); ?></h3>
+
+    <?php } //End config tab ?>
+
+
+    <?php if( $active_tab == 'support' ) { //Start Support tab ?>
+
+        <br />
+        <h3><?php _e('FAQs and Troubleshooting'); ?></h3>
         <p>Having trouble getting the plugin to work? Try the links below:</p>
         <ul>
         <li>- <?php _e('<a href="http://smashballoon.com/custom-facebook-feed/faq/general/" target="_blank">General Questions</a>'); ?></li>
         <li>- <?php _e('<a href="http://smashballoon.com/custom-facebook-feed/faq/setup/" target="_blank">Setting Up &amp; Displaying your Feed</a>'); ?></li>
         <li>- <?php _e('<a href="http://smashballoon.com/custom-facebook-feed/faq/troubleshooting/" target="_blank">Troubleshooting &amp; Common Support Questions</a>'); ?></li>
         </ul>
+        <br />
+        <h3>Documentation</h3>
+        <p>Need help setting up, configuring or customizing the plugin? Check out the links below:</p>
+        <ul>
+        <li>- <?php _e('<a href="http://smashballoon.com/custom-facebook-feed/docs/wordpress/" target="_blank">Installation and Configuration</a>'); ?></li>
+        <li>- <?php _e('<a href="http://smashballoon.com/custom-facebook-feed/docs/shortcodes/" target="_blank">Shortcode Reference</a>'); ?></li>
+        <li>- <?php _e('<a href="http://smashballoon.com/custom-facebook-feed/docs/snippets/" target="_blank">Custom CSS and JavaScript Snippets</a>'); ?></li>
+        </ul>
 
+        <br />
         <p><?php _e('Still need help? <a href="http://smashballoon.com/custom-facebook-feed/support/" target="_blank">Request support</a>.'); ?></p>
-        <p>Smash Balloon is committed to making this plugin better. Please let us know if you have had any issues when using this plugin so that we can continue to improve it!</p>
 
-        <hr />
-        <a href="http://smashballoon.com/custom-facebook-feed/demo" target="_blank"><img src="<?php echo plugins_url( 'img/pro.png' , __FILE__ ) ?>" /></a>
-        <hr />
-
-        <h4><?php _e('<u>System Info:</u>'); ?></h4>
+        <br />
+        <h3><?php _e('System Info'); ?></h3>
         <p>PHP Version:          <b><?php echo PHP_VERSION . "\n"; ?></b></p>
         <p>Web Server Info:      <b><?php echo $_SERVER['SERVER_SOFTWARE'] . "\n"; ?></b></p>
         <p>PHP allow_url_fopen:  <b><?php echo ini_get( 'allow_url_fopen' ) ? "<span style='color: green;'>Yes</span>" : "<span style='color: red;'>No</span>"; ?></b></p>
         <p>PHP cURL:             <b><?php echo is_callable('curl_init') ? "<span style='color: green;'>Yes</span>" : "<span style='color: red;'>No</span>" ?></b></p>
         <p>JSON:                 <b><?php echo function_exists("json_decode") ? "<span style='color: green;'>Yes</span>" : "<span style='color: red;'>No</span>" ?></b></p>
-        
+
         <button class="button secondary-button" id="cff-api-test">Test connection to Facebook API</button>
         
         <div id="cff-api-test-result">
-            <div class="cff-loader"></div>
-            <textarea readonly="readonly" onclick="this.focus();this.select()" title="To copy, click the field then press Ctrl + C (PC) or Cmd + C (Mac)."></textarea>
+            <?php $posts_json = cff_fetchUrl("https://graph.facebook.com/".get_option( $page_id )."/feed?access_token=".get_option( $access_token )."&limit=1"); ?>
+            <textarea readonly="readonly" onclick="this.focus();this.select()" title="To copy, click the field then press Ctrl + C (PC) or Cmd + C (Mac)."><?php echo $posts_json; ?></textarea>
         </div>
+
+    <?php } ?>
         
         
 <?php 
@@ -421,7 +457,7 @@ function cff_style_page() {
         'cff_feed_padding'          => '',
         'cff_like_box_position'     => 'bottom',
         'cff_like_box_outside'      => false,
-        'cff_likebox_width'         => '300',
+        'cff_likebox_width'         => '',
         'cff_like_box_faces'        => false,
         'cff_like_box_border'       => false,
 
@@ -436,6 +472,7 @@ function cff_style_page() {
         'cff_custom_css'            => '',
         'cff_custom_js'             => '',
         'cff_title_link'            => false,
+        'cff_post_tags'             => true,
         'cff_event_title_link'      => false,
         'cff_video_action'          => 'file',
         'cff_sep_color'             => '',
@@ -607,6 +644,7 @@ function cff_style_page() {
     $cff_custom_css = $options[ 'cff_custom_css' ];
     $cff_custom_js = $options[ 'cff_custom_js' ];
     $cff_title_link = $options[ 'cff_title_link' ];
+    $cff_post_tags = $options[ 'cff_post_tags' ];
     $cff_event_title_link = $options[ 'cff_event_title_link' ];
     $cff_video_action = $options[ 'cff_video_action' ];
     $cff_sep_color = $options[ 'cff_sep_color' ];
@@ -687,6 +725,7 @@ function cff_style_page() {
             if (isset($_POST[ 'cff_title_weight' ]) ) $cff_title_weight = $_POST[ 'cff_title_weight' ];
             if (isset($_POST[ 'cff_title_color' ]) ) $cff_title_color = $_POST[ 'cff_title_color' ];
             (isset($_POST[ 'cff_title_link' ]) ) ? $cff_title_link = $_POST[ 'cff_title_link' ] : $cff_title_link = '';
+            (isset($_POST[ 'cff_post_tags' ]) ) ? $cff_post_tags = $_POST[ 'cff_post_tags' ] : $cff_post_tags = '';
             $cff_body_size = $_POST[ 'cff_body_size' ];
             if (isset($_POST[ 'cff_body_weight' ]) ) $cff_body_weight = $_POST[ 'cff_body_weight' ];
             if (isset($_POST[ 'cff_body_color' ]) ) $cff_body_color = $_POST[ 'cff_body_color' ];
@@ -751,6 +790,7 @@ function cff_style_page() {
             $options[ 'cff_title_weight' ] = $cff_title_weight;
             $options[ 'cff_title_color' ] = $cff_title_color;
             $options[ 'cff_title_link' ] = $cff_title_link;
+            $options[ 'cff_post_tags' ] = $cff_post_tags;
             $options[ 'cff_body_size' ] = $cff_body_size;
             $options[ 'cff_body_weight' ] = $cff_body_weight;
             $options[ 'cff_body_color' ] = $cff_body_color;
@@ -991,9 +1031,7 @@ function cff_style_page() {
                     <tr valign="top">
                         <th class="bump-left" scope="row"><label><?php _e('Feed Background Color'); ?></label></th>
                         <td>
-                            <label for="cff_bg_color">#</label>
-                            <input name="cff_bg_color" type="text" value="<?php esc_attr_e( $cff_bg_color ); ?>" size="10" placeholder="Eg. ED9A00" />
-                            <span><a href="http://www.colorpicker.com/" target="_blank"><?php _e('Color Picker'); ?></a></span>
+                            <input name="cff_bg_color" value="#<?php esc_attr_e( str_replace('#', '', $cff_bg_color) ); ?>" class="cff-colorpicker" />
                         </td>
                     </tr>
                     <tr valign="top">
@@ -1047,38 +1085,36 @@ function cff_style_page() {
             <br />
             <h3><?php _e('Post Layout'); ?></h3>
             <table class="form-table">
+                
                 <tbody>
                     <tr>
-                        <td><p><?php _e('Choose a layout from the 3 below:'); ?></p></td>
                         <td>
-                            <select name="cff_preset_layout" disabled>
-                                <option value="thumb"><?php _e('Thumbnail'); ?></option>
-                                <option value="half"><?php _e('Half-width'); ?></option>
-                                <option value="full"><?php _e('Full-width'); ?></option>
-                            </select>
+                            <p><?php _e("Choose a layout from the 3 below."); ?>
                             <i style="color: #666; font-size: 11px; margin-left: 5px;"><a href="http://smashballoon.com/custom-facebook-feed/" target="_blank"><?php _e('Upgrade to Pro to enable post layouts'); ?></a></i>
-                        </td>
-                    </tr>
-                    <tr valign="top">
-                        <th scope="row"><?php _e('Thumbnail:'); ?></th>
-                        <td>
-                            <img src="<?php echo plugins_url( 'img/layout-thumb.png' , __FILE__ ) ?>" alt="Thumbnail Layout" width="400px" style="border: 1px solid #ccc;" />
-                        </td>
-                    </tr>
-                    <tr valign="top">
-                        <th scope="row"><?php _e('Half-width:'); ?></th>
-                        <td>
-                            <img src="<?php echo plugins_url( 'img/layout-half.png' , __FILE__ ) ?>" alt="Half Width Layout" width="400px" style="border: 1px solid #ccc;" />
-                        </td>
-                    </tr>
-                    <tr valign="top">
-                        <th scope="row"><?php _e('Full-width:'); ?></th>
-                        <td>
-                            <img src="<?php echo plugins_url( 'img/layout-full.png' , __FILE__ ) ?>" alt="Full Width Layout" width="400px" style="border: 1px solid #ccc;" />
+                            </p>
                         </td>
                     </tr>
                     </tbody>
                 </table>
+
+                <div class="cff-layouts cff-disabled">
+                    <div class="cff-layout">
+                        <h3><input type="radio" name="cff_preset_layout" id="cff_preset_layout" value="thumb" />&nbsp;<?php _e('Thumbnail'); ?></h3>
+                            <img src="<?php echo plugins_url( 'img/layout-thumb.png' , __FILE__ ) ?>" alt="Thumbnail Layout" />
+                            
+                    </div>
+                    <div class="cff-layout">
+                        <h3><input type="radio" name="cff_preset_layout" id="cff_preset_layout" value="half" />&nbsp;<?php _e('Half-width'); ?></h3>
+                            <img src="<?php echo plugins_url( 'img/layout-half.png' , __FILE__ ) ?>" alt="Half Width Layout" />
+                            
+                    </div>
+                    <div class="cff-layout">
+                        <h3><input type="radio" name="cff_preset_layout" id="cff_preset_layout" value="full" />&nbsp;<?php _e('Full-width'); ?></h3>
+                            <img src="<?php echo plugins_url( 'img/layout-full.png' , __FILE__ ) ?>" alt="Full Width Layout" />
+                            
+                    </div>
+                </div>
+
                 <hr />
                 <h3><?php _e('Show/Hide'); ?></h3>
                 <table class="form-table">
@@ -1218,13 +1254,21 @@ function cff_style_page() {
                                 <tr>
                                     <th><label for="cff_title_color" class="bump-left"><?php _e('Text Color'); ?></label></th>
                                     <td>
-                                        #<input name="cff_title_color" type="text" value="<?php esc_attr_e( $cff_title_color ); ?>" size="10" placeholder="Eg. ED9A00" />
-                                        <span><a href="http://www.colorpicker.com/" target="_blank"><?php _e('Color Picker'); ?></a></span>
+                                        <input name="cff_title_color" value="#<?php esc_attr_e( str_replace('#', '', $cff_title_color) ); ?>" class="cff-colorpicker" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <th><label for="cff_title_link" class="bump-left"><?php _e('Link text to Facebook post?'); ?></label></th>
                                     <td><input type="checkbox" name="cff_title_link" id="cff_title_link" <?php if($cff_title_link == true) echo 'checked="checked"' ?> />&nbsp;Yes</td>
+                                </tr>
+
+                                <tr>
+                                    <th><label for="cff_post_tags" class="bump-left"><?php _e('Enable Post Tags?'); ?></label></th>
+                                    <td>
+                                        <input type="checkbox" name="cff_post_tags" id="cff_post_tags" <?php if($cff_post_tags == true) echo 'checked="checked"' ?> />&nbsp;<?php _e('Yes'); ?>
+                                        <a class="cff-tooltip-link" href="JavaScript:void(0);"><?php _e('What are Post Tags?'); ?></a>
+                                        <p class="cff-tooltip cff-more-info"><?php _e("When you use tag another Facebook page or user in your post using the @ symbol it creates a post tag, which is a link to either that Facebook page or user profile."); ?></p>
+                                    </td>
                                 </tr>
                                 
                                 </tbody>
@@ -1275,8 +1319,7 @@ function cff_style_page() {
                                 <th><label for="cff_body_color" class="bump-left"><?php _e('Text Color'); ?></label></th>
                                 
                                 <td>
-                                    #<input name="cff_body_color" type="text" value="<?php esc_attr_e( $cff_body_color ); ?>" size="10" placeholder="Eg. ED9A00" />
-                                    <a href="http://www.colorpicker.com/" target="_blank"><?php _e('Color Picker'); ?></a>
+                                    <input name="cff_body_color" value="#<?php esc_attr_e( str_replace('#', '', $cff_body_color) ); ?>" class="cff-colorpicker" />
                                 </td>
                             </tr>
                             </tbody>
@@ -1337,8 +1380,7 @@ function cff_style_page() {
                             <tr>
                                 <th><label for="cff_date_color" class="bump-left"><?php _e('Text Color'); ?></label></th>
                                 <td>
-                                    #<input name="cff_date_color" type="text" value="<?php esc_attr_e( $cff_date_color ); ?>" size="10" placeholder="Eg. ED9A00" />
-                                    <a href="http://www.colorpicker.com/" target="_blank">Color Picker</a>
+                                    <input name="cff_date_color" value="#<?php esc_attr_e( str_replace('#', '', $cff_date_color) ); ?>" class="cff-colorpicker" />
                                 </td>
                             </tr>
                                     
@@ -1362,8 +1404,8 @@ function cff_style_page() {
                                         <option value="13" <?php if($cff_date_formatting == "13") echo 'selected="selected"' ?> ><?php echo date('d/m/y', $original); ?></option>
                                     </select>
 
-                                    <a class="cff-tooltip-link" href="JavaScript:void(0);" id="cff-translate-date"><?php _e('Translate this'); ?></a>
-                                    <div class="cff-tooltip">
+                                    <i style="margin-left: 5px; font-size: 11px;"><a class="cff-tooltip-link" href="JavaScript:void(0);" id="cff-translate-date"><?php _e('Translate this'); ?></a></i>
+                                    <div class="cff-tooltip cff-more-info">
                                         <div class="cff-tooltip-table">
                                             <p style="margin-bottom: 15px;"><?php _e('Translate the text below into the language you would like to use:'); ?></p>
 
@@ -1520,7 +1562,7 @@ function cff_style_page() {
                                 <th><label for="cff_date_custom" class="bump-left"><?php _e('Custom format'); ?></label></th>
                                 <td>
                                     <input name="cff_date_custom" type="text" value="<?php esc_attr_e( $cff_date_custom ); ?>" size="10" placeholder="Eg. F j, Y" />
-                                    <a href="http://smashballoon.com/custom-facebook-feed/docs/date/" target="_blank"><?php _e('Examples'); ?></a>
+                                    <i style="margin-left: 5px; font-size: 11px;"><a href="http://smashballoon.com/custom-facebook-feed/docs/date/" class="cff-external-link" target="_blank"><?php _e('Examples'); ?></a></i>
                                 </td>
                             </tr>
                             <tr>
@@ -1591,8 +1633,7 @@ function cff_style_page() {
                             <tr>
                                 <th><label for="cff_event_title_color" class="bump-left"><?php _e('Text Color'); ?></label></th>
                                 <td>
-                                    <input name="cff_event_title_color" type="text" value="<?php esc_attr_e( $cff_event_title_color ); ?>" size="10" placeholder="Eg. ED9A00" />
-                                    <a href="http://www.colorpicker.com/" target="_blank"><?php _e('Color Picker'); ?></a>
+                                    <input name="cff_event_title_color" value="#<?php esc_attr_e( str_replace('#', '', $cff_event_title_color) ); ?>" class="cff-colorpicker" />
                                 </td>
                             </tr>
                             <tr>
@@ -1649,8 +1690,7 @@ function cff_style_page() {
                             <tr>
                                 <th><label for="cff_event_date_color" class="bump-left"><?php _e('Text Color'); ?></label></th>
                                 <td>
-                                    #<input name="cff_event_date_color" type="text" value="<?php esc_attr_e( $cff_event_date_color ); ?>" size="10" placeholder="Eg. ED9A00" />
-                                    <a href="http://www.colorpicker.com/" target="_blank"><?php _e('Color Picker'); ?></a>
+                                    <input name="cff_event_date_color" value="#<?php esc_attr_e( str_replace('#', '', $cff_event_date_color) ); ?>" class="cff-colorpicker" />
                                 </td>
                             </tr>
                             <tr valign="top">
@@ -1687,7 +1727,7 @@ function cff_style_page() {
                                 <th><label for="cff_event_date_custom" class="bump-left"><?php _e('Custom event date format'); ?></label></th>
                                 <td>
                                     <input name="cff_event_date_custom" type="text" value="<?php esc_attr_e( $cff_event_date_custom ); ?>" size="10" placeholder="Eg. F j, Y - g:ia" />
-                                    <a href="http://smashballoon.com/custom-facebook-feed/docs/date/" target="_blank"><?php _e('Examples'); ?></a>
+                                    <i style="margin-left: 5px; font-size: 11px;"><a href="http://smashballoon.com/custom-facebook-feed/docs/date/" class="cff-external-link" target="_blank"><?php _e('Examples'); ?></a></i>
                                 </td>
                             </tr>
                             </tbody>
@@ -1737,8 +1777,7 @@ function cff_style_page() {
                             <tr>
                                 <th><label for="cff_event_details_color" class="bump-left"><?php _e('Text Color'); ?></label></th>
                                 <td>
-                                    #<input name="cff_event_details_color" type="text" value="<?php esc_attr_e( $cff_event_details_color ); ?>" size="10" placeholder="Eg. ED9A00" />
-                                    <a href="http://www.colorpicker.com/" target="_blank"><?php _e('Color Picker'); ?></a>
+                                    <input name="cff_event_details_color" value="#<?php esc_attr_e( str_replace('#', '', $cff_event_details_color) ); ?>" class="cff-colorpicker" />
                                 </td>
                             </tr>
                             </tbody>
@@ -1788,8 +1827,7 @@ function cff_style_page() {
                             <tr>
                                 <th><label for="cff_link_color" class="bump-left"><?php _e('Text Color'); ?></label></th>
                                 <td>
-                                    <input name="cff_link_color" type="text" value="<?php esc_attr_e( $cff_link_color ); ?>" size="10" placeholder="Eg. ED9A00" />
-                                    <a href="http://www.colorpicker.com/" target="_blank"><?php _e('Color Picker'); ?></a>
+                                    <input name="cff_link_color" value="#<?php esc_attr_e( str_replace('#', '', $cff_link_color) ); ?>" class="cff-colorpicker" />
                                 </td>
                             </tr>
                             <tr>
@@ -1824,6 +1862,7 @@ function cff_style_page() {
                     <tr valign="top">
                         <td>
                         <?php _e('Enter your own custom CSS in the box below'); ?>
+                        <i style="margin-left: 5px; font-size: 11px;"><a href="http://smashballoon.com/custom-facebook-feed/docs/snippets/" target="_blank"><?php _e('See some examples'); ?></a></i>
                         </td>
                     </tr>
                     <tr valign="top">
@@ -1839,6 +1878,7 @@ function cff_style_page() {
                     <tr valign="top">
                         <td>
                         <?php _e('Enter your own custom JavaScript/jQuery in the box below'); ?>
+                        <i style="margin-left: 5px; font-size: 11px;"><a href="http://smashballoon.com/custom-facebook-feed/docs/snippets/" target="_blank"><?php _e('See some examples'); ?></a></i>
                         </td>
                     </tr>
                     <tr valign="top">
@@ -1856,31 +1896,31 @@ function cff_style_page() {
                     <tr valign="top">
                         <th class="bump-left" scope="row"><label><?php _e('Show the Like Box'); ?></label></th>
                         <td>
-                            <input type="checkbox" name="cff_show_like_box" id="cff_show_like_box" <?php if($cff_show_like_box == true) echo 'checked="checked"' ?> />
+                            <input type="checkbox" name="cff_show_like_box" id="cff_show_like_box" <?php if($cff_show_like_box == true) echo 'checked="checked"' ?> />&nbsp;<?php _e('Yes'); ?>
+                            <i style="margin-left: 5px; font-size: 11px;"><a class="cff-tooltip-link" href="JavaScript:void(0);"><?php _e("Why isn't the Like Box showing up?"); ?></a></i>
+                            <p class="cff-tooltip cff-more-info"><?php _e("The most common reason is that you may have an extension installed in your web browser which is blocking the plugin from loading the Like Box from Facebook."); ?></p>
                         </td>
                     </tr>
                     <tr valign="top">
-                        <th class="bump-left" scope="row"><label><?php _e('Like Box Position'); ?></label></th>
+                        <th class="bump-left" scope="row"><label><?php _e('Position'); ?></label></th>
                         <td>
                             <select name="cff_like_box_position">
-                                <option value="bottom" <?php if($cff_like_box_position == "bottom") echo 'selected="selected"' ?> ><?php _e('Bottom'); ?></option>
-                                <option value="top" <?php if($cff_like_box_position == "top") echo 'selected="selected"' ?> ><?php _e('Top'); ?></option>
+                                <option value="bottom" <?php if($cff_like_box_position == "bottom") echo 'selected="selected"' ?> ><?php _e('Above posts'); ?></option>
+                                <option value="top" <?php if($cff_like_box_position == "top") echo 'selected="selected"' ?> ><?php _e('Below posts'); ?></option>
                             </select>
                         </td>
                     </tr>
                     <tr valign="top">
                         <th class="bump-left" scope="row"><label><?php _e('Display outside the scrollable area'); ?></label></th>
                         <td>
-                            <input type="checkbox" name="cff_like_box_outside" id="cff_like_box_outside" <?php if($cff_like_box_outside == true) echo 'checked="checked"' ?> />
+                            <input type="checkbox" name="cff_like_box_outside" id="cff_like_box_outside" <?php if($cff_like_box_outside == true) echo 'checked="checked"' ?> />&nbsp;<?php _e('Yes'); ?>
                             <i style="color: #666; font-size: 11px; margin-left: 5px;"><?php _e('(Only applicable if you have set a height on the feed)'); ?></i>
                         </td>
                     </tr>
                     <tr valign="top">
-                        <th class="bump-left" scope="row"><label><?php _e('Like Box Background Color'); ?></label></th>
+                        <th class="bump-left" scope="row"><label><?php _e('Background Color'); ?></label></th>
                         <td>
-                            <label for="cff_likebox_bg_color">#</label>
-                            <input name="cff_likebox_bg_color" type="text" value="<?php esc_attr_e( $cff_likebox_bg_color ); ?>" size="10" />
-                            <span>Eg. ED9A00</span>&nbsp;&nbsp;<a href="http://www.colorpicker.com/" target="_blank"><?php _e('Color Picker'); ?></a>
+                            <input name="cff_likebox_bg_color" value="#<?php esc_attr_e( str_replace('#', '', $cff_likebox_bg_color) ); ?>" class="cff-colorpicker" />
                         </td>
                     </tr>
                     <tr valign="top">
@@ -1890,8 +1930,8 @@ function cff_style_page() {
                                 <option value="blue" <?php if($cff_like_box_text_color == "blue") echo 'selected="selected"' ?> ><?php _e('Blue'); ?></option>
                                 <option value="white" <?php if($cff_like_box_text_color == "white") echo 'selected="selected"' ?> ><?php _e('White'); ?></option>
                             </select>
-                            <a class="cff-tooltip-link" href="JavaScript:void(0);"><?php _e('Why only these 2 colors?'); ?></a>
-                            <p class="cff-tooltip"><?php _e("The styling of the Facebook Like box widget is restricted by Facebook. This means that the only two text colors available are blue and white, intended for either a light of dark color scheme respectively."); ?></p>
+                            <i style="margin-left: 5px; font-size: 11px;"><a class="cff-tooltip-link" href="JavaScript:void(0);"><?php _e('Why only these 2 colors?'); ?></a></i>
+                            <p class="cff-tooltip cff-more-info"><?php _e("The styling of the Facebook Like box widget is restricted by Facebook. This means that the only two text colors available are blue and white, intended for either a light of dark color scheme respectively."); ?></p>
                         </td>
                     </tr>
                     <tr valign="top">
@@ -1904,14 +1944,14 @@ function cff_style_page() {
                     <tr valign="top">
                         <th class="bump-left" scope="row"><label><?php _e('Show faces of fans'); ?></label></th>
                         <td>
-                            <input type="checkbox" name="cff_like_box_faces" id="cff_like_box_faces" <?php if($cff_like_box_faces == true) echo 'checked="checked"' ?> />
+                            <input type="checkbox" name="cff_like_box_faces" id="cff_like_box_faces" <?php if($cff_like_box_faces == true) echo 'checked="checked"' ?> />&nbsp;<?php _e('Yes'); ?>
                             <i style="color: #666; font-size: 11px; margin-left: 5px;"><?php _e('Show thumbnail photos of fans who like your page'); ?></i>
                         </td>
                     </tr>
                     <tr valign="top">
                         <th class="bump-left" scope="row"><label><?php _e('Show the Like Box border'); ?></label></th>
                         <td>
-                            <input type="checkbox" name="cff_like_box_border" id="cff_like_box_outside" <?php if($cff_like_box_border == true) echo 'checked="checked"' ?> />
+                            <input type="checkbox" name="cff_like_box_border" id="cff_like_box_outside" <?php if($cff_like_box_border == true) echo 'checked="checked"' ?> />&nbsp;<?php _e('Yes'); ?>
                             <i style="color: #666; font-size: 11px; margin-left: 5px;"><?php _e('Only applicable if you are showing faces of fans'); ?></i>
                         </td>
                     </tr>
@@ -1947,9 +1987,7 @@ function cff_style_page() {
                     <tr valign="top">
                         <th class="bump-left" scope="row"><label><?php _e('Background Color'); ?></label></th>
                         <td>
-                            <label for="cff_header_bg_color">#</label>
-                            <input name="cff_header_bg_color" type="text" value="<?php esc_attr_e( $cff_header_bg_color ); ?>" size="10" />
-                            <span>Eg. ED9A00</span>&nbsp;&nbsp;<a href="http://www.colorpicker.com/" target="_blank"><?php _e('Color Picker'); ?></a>
+                            <input name="cff_header_bg_color" value="#<?php esc_attr_e( str_replace('#', '', $cff_header_bg_color) ); ?>" class="cff-colorpicker" />
                         </td>
                     </tr>
                     </tr>
@@ -1995,8 +2033,7 @@ function cff_style_page() {
                     <tr>
                         <th class="bump-left" scope="row"><label><?php _e('Text Color'); ?></label></th>
                         <td>
-                            #<input name="cff_header_text_color" type="text" value="<?php esc_attr_e( $cff_header_text_color ); ?>" size="10" placeholder="Eg. ED9A00" />
-                            <span><a href="http://www.colorpicker.com/" target="_blank"><?php _e('Color Picker'); ?></a></span>
+                            <input name="cff_header_text_color" value="#<?php esc_attr_e( str_replace('#', '', $cff_header_text_color) ); ?>" class="cff-colorpicker" />
                         </td>
                     </tr>
                     <tr>
@@ -2030,8 +2067,7 @@ function cff_style_page() {
                     <tr>
                         <th class="bump-left" scope="row"><label><?php _e('Icon Color'); ?></label></th>
                         <td>
-                            #<input name="cff_header_icon_color" id="cff-header-icon-color" type="text" value="<?php esc_attr_e( $cff_header_icon_color ); ?>" size="10" placeholder="Eg. ED9A00" />
-                            <span><a href="http://www.colorpicker.com/" target="_blank"><?php _e('Color Picker'); ?></a></span>
+                            <input name="cff_header_icon_color" value="#<?php esc_attr_e( str_replace('#', '', $cff_header_icon_color) ); ?>" class="cff-colorpicker" />
                         </td>
                     </tr>
                     <tr>
@@ -2068,9 +2104,7 @@ function cff_style_page() {
                     <tr valign="top">
                         <th class="bump-left" scope="row"><label><?php _e('Separating Line Color'); ?></label></th>
                         <td>
-                            <label for="cff_sep_color">#</label>
-                            <input name="cff_sep_color" type="text" value="<?php esc_attr_e( $cff_sep_color ); ?>" size="10" />
-                            <span>Eg. ED9A00</span>&nbsp;&nbsp;<a href="http://www.colorpicker.com/" target="_blank"><?php _e('Color Picker'); ?></a>
+                            <input name="cff_sep_color" value="#<?php esc_attr_e( str_replace('#', '', $cff_sep_color) ); ?>" class="cff-colorpicker" />
                         </td>
                     </tr>
                     <tr valign="top">
@@ -2086,7 +2120,7 @@ function cff_style_page() {
             <?php } //End Misc tab ?>
 
 
-            <?php if( $active_tab == 'custom_text' ) { //Start Post Layout tab ?>
+            <?php if( $active_tab == 'custom_text' ) { //Start Custom Text tab ?>
             <input type="hidden" name="<?php echo $style_custom_text_hidden_field_name; ?>" value="Y">
             <br />
             <h3><?php _e('Custom Text / Translate'); ?></h3>
@@ -2186,21 +2220,22 @@ function cff_style_page() {
             </table>
             
             <?php submit_button(); ?>
-            <?php } //End Post Layout tab ?>
+            <?php } //End Custom Text tab ?>
 
         </form>
 <?php 
 } //End Style_Page
 //Enqueue admin styles
 function cff_admin_style() {
-        wp_register_style( 'custom_wp_admin_css', plugin_dir_url( __FILE__ ) . 'css/cff-admin-style.css', false, '1.0.0' );
+        wp_register_style( 'custom_wp_admin_css', plugin_dir_url( __FILE__ ) . 'css/cff-admin-style.css?3', false, '1.0.0' );
         wp_enqueue_style( 'custom_wp_admin_css' );
         wp_enqueue_style( 'cff-font-awesome', '//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css', array(), '4.0.3' );
+        wp_enqueue_style( 'wp-color-picker' );
 }
 add_action( 'admin_enqueue_scripts', 'cff_admin_style' );
 //Enqueue admin scripts
 function cff_admin_scripts() {
-    wp_enqueue_script( 'cff_admin_script', plugin_dir_url( __FILE__ ) . 'js/cff-admin-scripts.js' );
+    wp_enqueue_script( 'cff_admin_script', plugin_dir_url( __FILE__ ) . 'js/cff-admin-scripts.js?2' );
     if( !wp_script_is('jquery-ui-draggable') ) { 
         wp_enqueue_script(
             array(
@@ -2210,7 +2245,12 @@ function cff_admin_scripts() {
             )
         );
     }
-    wp_enqueue_script( 'hoverIntent' );
+    wp_enqueue_script(
+        array(
+        'hoverIntent',
+        'wp-color-picker'
+        )
+    );
 }
 add_action( 'admin_enqueue_scripts', 'cff_admin_scripts' );
 ?>

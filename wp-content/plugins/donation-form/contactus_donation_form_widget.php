@@ -20,7 +20,7 @@ class contactus_donation_form_Widget extends WP_Widget {
 		}
 		contactuscom_donation_form(array_merge($args, $instance));
 	}
-};
+}
 
 function contactuscom_donation_form($args = array()) {
     extract($args);
@@ -28,11 +28,9 @@ function contactuscom_donation_form($args = array()) {
     
     if(strlen($cUsDF_form_key)){
         $xHTML  = '<div id="cUsDF_form_widget" style="clear:both;min-height:530px;margin:10px auto;">';
-        $xHTML .= '<script type="text/javascript" src="//cdn.contactus.com/cdntest/forms/'. $cUsDF_form_key .'/inline.js"></script>';
+        $xHTML .= '<script type="text/javascript" src="//cdn.contactus.com/cdn/forms/'. $cUsDF_form_key .'/inline.js"></script>';
         $xHTML .= '</div>';
         
         echo $xHTML;
     }
-};  
-
-?>
+}

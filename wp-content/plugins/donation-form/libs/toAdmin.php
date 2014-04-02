@@ -15,7 +15,7 @@
 
 <body>
     
-    <p><img class="alignnone size-full wp-image-435" alt="ajax-loader" src="https://www.contactus.com/wp-content/uploads/2013/09/ajax-loader.gif" width="24" height="24" /> Loading your ContactUs.com Dashboard. . .</p>
+    <p>Loading your ContactUs.com Dashboard. . .</p>
     
 <?php
     

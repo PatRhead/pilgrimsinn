@@ -3,8 +3,8 @@ Contributors: allendav, designgeneers
 Donate link: http://www.allendav.com/
 Tags: donation, donations, paypal, donate, non-profit, charity, gifts
 Requires at least: 3.4
-Tested up to: 3.8
-Stable tag: 2.9.0
+Tested up to: 3.8.1
+Stable tag: 3.1.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -66,6 +66,23 @@ Yes!
 6. Dashboard >> Thank You Email Templates
 
 == Changelog ==
+
+= 3.1.0 =
+* Added: Filter for donation item name
+* Added IDs for form sections to allow for more styling of the donation form
+
+= 3.0.3 =
+* Fixed: A few strings were not properly marked for translation.
+
+= 3.0.2 =
+* Fixed: Bug: Removed unused variable that was causing PHP warning
+
+= 3.0.1 =
+* Fixed: Bug: Was using admin_print_styles to enqueue admin CSS.  Switched to correct hook - admin_enqueue_scripts
+
+= 3.0.0 =
+* Added: Gift Aid checkbox for UK donors
+* Fixed: Bug that would cause IPN notifications to not be received
 
 = 2.9.0 =
 * Added: Optional employer match section to donation form - props Jamie Summerlin

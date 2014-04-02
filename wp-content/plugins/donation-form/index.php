@@ -1,4 +1,3 @@
 <?php
 // Silence is golden.
-// Copyright 2013  ContactUs.com  ( info@contactus.com )
-?>
+// Copyright 2014  ContactUs.com  ( info@contactus.com )

@@ -162,23 +162,24 @@ function cUsDF_LoadDefaultKey_callback() {
 add_action('wp_ajax_cUsDF_verifyCustomerEmail', 'cUsDF_verifyCustomerEmail_callback');
 function cUsDF_verifyCustomerEmail_callback() {
     
-    if       ( !strlen($_REQUEST['fName']) ){      echo 'Missing First Name, is required fieldsss!';      die();
-    }elseif  ( !strlen($_REQUEST['lName']) ){      echo 'Missing Last Name, is required field!';       die();
-    }elseif  ( !strlen($_REQUEST['Email']) ){      echo 'Missing/Invalid Email, is required field!';   die();
-    }elseif  ( !strlen($_REQUEST['website']) ){    echo 'Missing Website, is required field!';         die();
+    if      ( !strlen(filter_input(INPUT_POST, 'fName',FILTER_SANITIZE_STRING)) ){      echo 'Missing First Name, is required field';      die();
+    }elseif  ( !strlen(filter_input(INPUT_POST, 'lName',FILTER_SANITIZE_STRING)) ){      echo 'Missing Last Name, is required field';       die();
+    }elseif  ( !strlen(filter_input(INPUT_POST, 'Email',FILTER_VALIDATE_EMAIL)) ){      echo 'Missing/Invalid Email, is required field';   die();
+    }elseif  ( !strlen(filter_input(INPUT_POST, 'website')) ){    echo 'Missing Website, is required field';         die();
     }else{
         
         $cUsDF_api = new cUsComAPI_DF(); //CONTACTUS.COM API
         
         $postData = array(
-            'fname' => $_REQUEST['fName'],
-            'lname' => $_REQUEST['lName'],
-            'email' => $_REQUEST['Email'],
-            'credential' => $_REQUEST['credential'],
-            'website' => $_REQUEST['website']
+            'fname' => filter_input(INPUT_POST, 'fName',FILTER_SANITIZE_STRING),
+            'lname' => filter_input(INPUT_POST, 'lName',FILTER_SANITIZE_STRING),
+            'email' => filter_input(INPUT_POST, 'Email',FILTER_VALIDATE_EMAIL),
+            'phone' => filter_input(INPUT_POST, 'Phone', FILTER_SANITIZE_NUMBER_INT),
+            'credential' => filter_input(INPUT_POST, 'credential'),
+            'website' => filter_input(INPUT_POST, 'website')
         );
 
-        $cUsDF_API_EmailResult = $cUsDF_api->verifyCustomerEmail($_REQUEST['Email']); //EMAIL VERIFICATION
+        $cUsDF_API_EmailResult = $cUsDF_api->verifyCustomerEmail(filter_input(INPUT_POST, 'Email',FILTER_VALIDATE_EMAIL)); //EMAIL VERIFICATION
         if($cUsDF_API_EmailResult) {
             $cUsDF_jsonEmail = json_decode($cUsDF_API_EmailResult);
 			
@@ -189,12 +190,6 @@ function cUsDF_verifyCustomerEmail_callback() {
                     //echo 'No Existe';
                     echo 1;
                     update_option('cUsDF_settings_userData', $postData);
-					
-					// if one register was successful
-                   /* if( cUsDF_createCustomer_callback() == 1){
-                       // update_option('cf7_cloud_database_active', 1);
-                        echo 1;
-                    }*/
 					
                     break;
                 case 1 :
@@ -221,12 +216,12 @@ function cUsDF_createCustomer_callback() {
     
     $cUsDF_userData = get_option('cUsDF_settings_userData'); //get the saved user data
     
-    if      ( !strlen($cUsDF_userData['fname']) ){      echo 'Missing First Name, is required fieldsss!';      die();
-    }elseif  ( !strlen($cUsDF_userData['lname']) ){      echo 'Missing Last Name, is required field!';       die();
-    }elseif  ( !strlen($cUsDF_userData['email']) ){      echo 'Missing/Invalid Email, is required field!';   die();
-    }elseif  ( !strlen($cUsDF_userData['website']) ){    echo 'Missing Website, is required field!';         die();
-    }elseif  ( !strlen($_REQUEST['Template_Desktop_Form']) ){    echo 'Missing Form Template!';         die();
-    }elseif  ( !strlen($_REQUEST['Template_Desktop_Tab']) ){    echo 'Missing Tab Template!';         die();
+    if      ( !strlen($cUsDF_userData['fname']) ){      echo 'Missing First Name, is required field';      die();
+    }elseif  ( !strlen($cUsDF_userData['lname']) ){      echo 'Missing Last Name, is required field';       die();
+    }elseif  ( !strlen($cUsDF_userData['email']) ){      echo 'Missing/Invalid Email, is required field';   die();
+    }elseif  ( !strlen($cUsDF_userData['website']) ){    echo 'Missing Website, is required field';         die();
+    }elseif  ( !strlen(filter_input(INPUT_POST, 'Template_Desktop_Form',FILTER_SANITIZE_STRING)) ){    echo 'Missing Form Template';         die();
+    }elseif  ( !strlen(filter_input(INPUT_POST, 'Template_Desktop_Tab',FILTER_SANITIZE_STRING)) ){    echo 'Missing Tab Template';         die();
     }else{
         
         $cUsDF_api = new cUsComAPI_DF(); //CONTACTUS.COM API
@@ -236,11 +231,12 @@ function cUsDF_createCustomer_callback() {
             'lname' => $cUsDF_userData['lname'],
             'email' => $cUsDF_userData['email'],
             'website' => $cUsDF_userData['website'],
-            'Template_Desktop_Form' => $_REQUEST['Template_Desktop_Form'],
-            'Template_Desktop_Tab' => $_REQUEST['Template_Desktop_Tab'],
-			'Main_Category' => $_REQUEST['CU_category'],
-            'Sub_Category' => $_REQUEST['CU_subcategory'],
-            'Goals' => $_REQUEST['CU_goals']
+            'phone' => preg_replace('/[^0-9]+/i', '', $cUsDF_userData['phone']),
+            'Template_Desktop_Form' => filter_input(INPUT_POST, 'Template_Desktop_Form',FILTER_SANITIZE_STRING),
+            'Template_Desktop_Tab' => filter_input(INPUT_POST, 'Template_Desktop_Tab',FILTER_SANITIZE_STRING),
+            'Main_Category' => filter_input(INPUT_POST, 'CU_category',FILTER_SANITIZE_STRING),
+            'Sub_Category' => filter_input(INPUT_POST, 'CU_subcategory',FILTER_SANITIZE_STRING),
+            'Goals' => filter_input(INPUT_POST, 'CU_goals',FILTER_SANITIZE_STRING)
         );
         
         $cUsDF_API_result = $cUsDF_api->createCustomer($postData, $cUsDF_userData['credential']);
@@ -248,8 +244,6 @@ function cUsDF_createCustomer_callback() {
         if($cUsDF_API_result) {
 
             $cUs_json = json_decode($cUsDF_API_result);
-
-            //print_r( $cUs_json ); exit;
 
             switch ( $cUs_json->status ) {
 

@@ -1,8 +1,8 @@
 === Donation Form ===
 Contributors: contactus.com
-Stable tag: 1.1.1
+Stable tag: 1.1.3
 Requires at least: 3.5
-Tested up to: 3.8
+Tested up to: 3.8.1
 Donate link:
 Tags: Donation Form , donation plugin , donation widget , payment form, payment plugin, paypal form, donate , payment, donation, contribution, paypal , contactus.com
 License: GPLv2 or later
@@ -70,13 +70,11 @@ With the release of the Donation Form we have added quite a few customization op
 
 For our more web-savvy users, you can also run Donation A/B optimization tests to better convert your website visitors into donors. With our optimization tools, you’ll be able to run experiments to see which donation tabs and forms generate more donations. And we make it easy to learn how to optimize. *Check out Donation Plugin A/B testing, below.  
 
-
 **Donation Form Analytics**
 
 The Donation Plugin  lets you store important optimization information, such as what URL in your website provided the donation, contact information, how many views each donation TAB has gotten, how many opens, how many leads generated from the donations tab. 
 Donation Form Delivery Options, Thank You page & Auto Responder 
 With the Donation Form you can specify e-mail delivery options, an automated response, a thank you page URL or just customize the content of a default thank you page. 
-
 
 
 ### About ###
@@ -88,6 +86,10 @@ Donations Form is built by ContactUs.com.  The plugin automatically saves form s
 > * [Facebook](https://www.facebook.com/ContactUscom)
 > * [Twitter](https://twitter.com/ContactUsCom)
 > * [Find tutorials on our Youtube channel](http://www.youtube.com/user/ContactUsCom)
+
+
+**Please note:** This plugin from ContactUs.com includes JavaScript code used to connect the plugin to the ContactUs.com servers, when enabled. This JavaScript is used to connect to live chat support so that questions can be asked and answered directly from within the plugin.
+
 
 == Support ==
 
@@ -136,7 +138,6 @@ You can find support on the ContactUs.com Help page at [help.contactus.com](http
 
 * Because the plugin can integrate your donation Form with over 20 contact management and email marketing tools, you can export the consolidated data using the third party tools. ContactUs.com is working on a simple data export tool of its own, but there is no release date available.
 
-
 == Screenshots ==
 
 1. Form Settings Panel
@@ -144,8 +145,15 @@ You can find support on the ContactUs.com Help page at [help.contactus.com](http
 3. Tab Example
 4. Inline form example
 
-
 == Changelog ==
+
+= 1.1.3 =
+* Updates on SignUp process
+* Bug Fixes: Form and Tabs thumbnails in form placement are displayed correctly
+* *Launch date 21.02.2014*
+
+= 1.1.2 =
+* JavaScript added to enable live chat support with ContactUs.com within the plugin.
 
 = 1.1.1 =
 * General Bug fixes
@@ -161,6 +169,9 @@ You can find support on the ContactUs.com Help page at [help.contactus.com](http
 First version of Donation Form available to WordPress community.
 
 == Upgrade Notice ==
+
+= 1.1.2 =
+New version available, update NOW!
 
 = 1.1.1 =
 New version available, update NOW!

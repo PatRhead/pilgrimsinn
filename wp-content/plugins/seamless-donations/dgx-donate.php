@@ -3,7 +3,7 @@
 Plugin Name: Seamless Donations
 Plugin URI: http://allendav.com/wordpress-plugins/seamless-donations-for-wordpress/
 Description: Making online donations easy for your visitors; making donor and donation management easy for you.  Receive donations (now including repeating donations), track donors and send customized thank you messages with Seamless Donations for WordPress.  Works with PayPal accounts.
-Version: 2.9.0
+Version: 3.1.0
 Author: allendav
 Author URI: http://www.allendav.com/
 License: GPL2
@@ -25,10 +25,16 @@ License: GPL2
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
  
-include 'dgx-donate-admin.php';
-include 'dgx-donate-paypalstd.php';
-include 'inc/geography.php';
-include 'inc/currency.php';
+require_once 'dgx-donate-admin.php';
+require_once 'dgx-donate-paypalstd.php';
+require_once 'inc/geography.php';
+require_once 'inc/currency.php';
+
+/******************************************************************************************************/
+function dgx_donate_plugins_loaded() {
+	load_plugin_textdomain( 'dgx-donate', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+}
+add_action( 'plugins_loaded', 'dgx_donate_plugins_loaded' );
 
 /******************************************************************************************************/
 function dgx_donate_get_giving_levels()
@@ -116,12 +122,12 @@ add_action('wp_enqueue_scripts', 'dgx_donate_queue_stylesheet');
 
 /**********************************************************************************************************/
 function dgx_donate_queue_admin_stylesheet() {
-        $styleurl = plugins_url('/css/adminstyles.css', __FILE__);
+	$style_url = plugins_url( '/css/adminstyles.css', __FILE__ );
 
-        wp_register_style('dgx_donate_admin_css', $styleurl);
-        wp_enqueue_style('dgx_donate_admin_css');
+	wp_register_style( 'dgx_donate_admin_css', $style_url );
+	wp_enqueue_style( 'dgx_donate_admin_css' );
 }
-add_action('admin_print_styles', 'dgx_donate_queue_admin_stylesheet');
+add_action( 'admin_enqueue_scripts', 'dgx_donate_queue_admin_stylesheet' );
 
 /******************************************************************************************************/
 function dgx_donate_queue_scripts() {
@@ -225,7 +231,8 @@ function dgx_donate_get_meta_map() {
 		'ANONYMOUS' => '_dgx_donate_anonymous',
 		'PAYMENTMETHOD' => '_dgx_donate_payment_method',
 		'EMPLOYERMATCH' => '_dgx_donate_employer_match',
-		'EMPLOYERNAME' => '_dgx_donate_employer_name'
+		'EMPLOYERNAME' => '_dgx_donate_employer_name',
+		'UKGIFTAID' => '_dgx_donate_uk_gift_aid'
 	);
 }
 
@@ -464,7 +471,7 @@ function dgx_donate_get_month_year_selector($monthSelectName, $yearSelectName)
 function dgx_donate_get_donation_section($formContent)
 {
 	$output = "";
-	$output .= "<div class=\"dgx-donate-form-section\">\n";
+	$output .= "<div class='dgx-donate-form-section' id='dgx-donate-form-donation-section'>\n";
 	$output .= "<h2>" . esc_html__( 'Donation Information', 'dgx-donate' ) . "</h2>\n";
 	
 	$output .= "<p>" . esc_html__( 'I would like to make a donation in the amount of:', 'dgx-donate' ) . "</p>";
@@ -487,7 +494,8 @@ function dgx_donate_get_donation_section($formContent)
 	}
 	$output .= "</p>";
 
-	$output .= "<p><input type=\"radio\" name=\"_dgx_donate_amount\" value=\"OTHER\" id=\"dgx-donate-other-radio\" /> Other: ";
+	$output .= "<p><input type='radio' name='_dgx_donate_amount' value='OTHER' id='dgx-donate-other-radio' />";
+	$output .= esc_html__( 'Other: ', 'dgx-donate' );
 	$output .= "<input type=\"text\" class=\"aftertext\" id=\"dgx-donate-other-input\" name=\"_dgx_donate_user_amount\" />";
 	$output .= "</p>\n";
 	
@@ -548,7 +556,7 @@ function dgx_donate_get_tribute_section($formContent)
 	$honoree_country = get_option('dgx_donate_default_country');
 
 	$output = "";
-	$output .= "<div class='dgx-donate-form-section'>\n";
+	$output .= "<div class='dgx-donate-form-section' id='dgx-donate-form-tribute-section'>\n";
 	$output .= "<h2>" . esc_html__( 'Tribute Gift', 'dgx-donate' ) . "</h2>\n";
 	$output .= "<div class='dgx-donate-form-expander'>\n";
 	$output .= "<p class='dgx-donate-form-expander-header'>";
@@ -628,7 +636,7 @@ function dgx_donate_get_tribute_section($formContent)
 /******************************************************************************************************/
 function dgx_donate_get_employer_section( $form_content ) {
 	$output = "";
-	$output .= "<div class='dgx-donate-form-section'>";
+	$output .= "<div class='dgx-donate-form-section' id='dgx-donate-form-employer-section'>";
 	$output .= "<h2>" . esc_html__( 'Employer Match', 'dgx-donate' ) . "</h2>";
 	$output .= "<div class='dgx-donate-form-expander'>";
 	$output .= "<p class='dgx-donate-form-expander-header'>";
@@ -653,7 +661,7 @@ function dgx_donate_get_employer_section( $form_content ) {
 function dgx_donate_get_donor_section( $form_content ) {
 
 	$output = "";
-	$output .= "<div class='dgx-donate-form-section'>";
+	$output .= "<div class='dgx-donate-form-section' id='dgx-donate-form-donor-section'>";
 	$output .= "<h2>" . esc_html__( 'Donor Information', 'dgx-donate' ) . "</h2>";
 	$output .= "<p>";
 	$output .= "<label for='_dgx_donate_donor_first_name'>" . esc_html__( 'First Name:', 'dgx-donate' ) . " </label>";
@@ -676,7 +684,7 @@ function dgx_donate_get_donor_section( $form_content ) {
 	
 	$output .= "<p>";
 	$output .= "<input type='checkbox' name='_dgx_donate_anonymous' />";
-	$output .= esc_html( 'Please do not publish my name.  I would like to remain anonymous.', 'dgx-donate' );
+	$output .= esc_html__( 'Please do not publish my name.  I would like to remain anonymous.', 'dgx-donate' );
 	$output .= "</p>\n";
 	
 	$output .= "</div>\n";
@@ -693,7 +701,7 @@ function dgx_donate_get_billing_section( $form_content ) {
 	$donor_country = get_option('dgx_donate_default_country');
 
 	$output = "";
-	$output .= "<div class='dgx-donate-form-section'>\n";
+	$output .= "<div class='dgx-donate-form-section' id='dgx-donate-form-address-section'>\n";
 	$output .= "<h2>" . esc_html__( 'Donor Address', 'dgx_donate' ) . "</h2>\n";
 	
 	$output .= "<p>";
@@ -726,6 +734,10 @@ function dgx_donate_get_billing_section( $form_content ) {
 	$output .= "<p>";
 	$output .= "<label for='_dgx_donate_donor_zip'>" . esc_html__( 'Postal Code:', 'dgx-donate' ) . "</label>";
 	$output .= "<input class='dgx_donate_zip_input' type='text' name='_dgx_donate_donor_zip'  size='10' value='' />";
+	$output .= "</p>";
+	$output .= "<p>";
+	$output .= "<input class='dgx_donate_uk_gift_aid' type='checkbox' name='_dgx_donate_uk_gift_aid' />";
+	$output .= esc_html( 'I am a UK taxpayer and my gift qualifies for Gift Aid.', 'dgx-donate' );
 	$output .= "</p>";
 	$output .= "</div>"; // dgx_donate_geography_selects
 	

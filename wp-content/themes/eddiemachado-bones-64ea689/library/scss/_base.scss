@@ -20,11 +20,7 @@ body {
 	font-size: 100%;
 	line-height: 1.5;
 	color: #565656;
-	background-color:#F5F5F5;
-
 }
-
-
 
 /********************
 WORDPRESS BODY CLASSES
@@ -154,44 +150,8 @@ h5, .h5 {
 HEADER STYLES
 *********************/
 
-.header {
-	background-color: #F1F2F2;
-	height:113px;
-	font-family:'Lato', sans-serif;
-	font-weight:300;
-	nav {
-		display: inline-block;
-		position: relative;
-		float: right;
-		text-align: center;
-	}
-	.nav {
-		background-color: transparent;
-		padding-top: 27px;
+.header {}
 
-		li a {
-			background-color:transparent;
-			color:#93BFCE;
-			font-size: 28px;
-
-			&:hover, &:focus{
-				color:#9DB269;
-				background-color: transparent;
-
-			}
-		}
-
-<<<<<<< HEAD
-	}
-}
-
-#inner-header {
-	max-width:990px;
-	padding-top:15px;
-}
-
-=======
->>>>>>> patrick
 #logo {}
 
 /*********************
@@ -206,25 +166,18 @@ the navs on the site so our css is cleaner
 and more scalable.
 */
 
-
-
 .nav {
 	border: 1px solid #ccc;
 	border-bottom: 0;
-	display: inline-block;
-	position: relative;
-	float: right;
-
 
 	li {
 
 		a {
 			display: block;
 			text-decoration: none;
-			padding: 0px 15px;
+			padding: 10px 10px;
 			background-color: #eee;
 			border-bottom: 1px solid #ccc;
-			margin: -3px auto;
 
 			/*
 			remember this is for mobile ONLY, so there's no need
@@ -291,51 +244,8 @@ POSTS & CONTENT STYLES
 
 #content {
 	margin-top: 2.2em;
-	margin-top:0px;
 }
 
-<<<<<<< HEAD
-#inner-footer {
-	display:inline-block;
-	margin-top:35px;
-}
-
-.hentry {
-
-	header {}
-
-
-
-	footer {
-		height:180px;
-		text-align: center;
-	}
-
-	} /* end .hentry */
-
-	.single-title,
-	.page-title {}
-
-	.single-title {}
-
-	.page-title {}
-
-	.archive-title { }
-
-	/* want to style individual post classes? Booya! */
-	.post-id {}         /* post by id (i.e. post-3) */
-	.post {}            /* general post style */
-	.page {}            /* general article on a page style */
-	.attachment {}      /* general style on an attatchment */
-	.sticky {}          /* sticky post style */
-	.hentry {}          /* hentry class */
-	.category-slug {}   /* style by category (i.e. category-videos) */
-	.tag-slug {}        /* style by tag (i.e. tag-news) */
-
-	/* post meta */
-	.byline {
-		color: #999;
-=======
 .hentry {
 
 	header {}
@@ -374,22 +284,8 @@ POSTS & CONTENT STYLES
 	.entry-content {
 
 		p {}
->>>>>>> patrick
-
-		time {}
-	}
-
-<<<<<<< HEAD
-	/* entry content */
-	.entry-content {
-
-		p {}
 
 
-		ul, ol, table, dl {}
-
-		ul, ol {
-=======
 		ul, ol, table, dl {}
 
 		ul, ol {
@@ -399,23 +295,11 @@ POSTS & CONTENT STYLES
 		}
 
 		ul {
->>>>>>> patrick
 
 			li {}
 
 		}
 
-<<<<<<< HEAD
-		ul {
-=======
-		ol {
->>>>>>> patrick
-
-			li {}
-
-		}
-
-<<<<<<< HEAD
 		ol {
 
 			li {}
@@ -439,25 +323,6 @@ POSTS & CONTENT STYLES
 			margin-bottom: 1.5em;
 		}
 
-=======
-		blockquote {
-
-			&:before {}
-
-		}
-
-		dl {}
-
-		dt {}
-
-		dd {
-			margin-left: 0;
-			font-size: 0.9em;
-			color: #787878;
-			margin-bottom: 1.5em;
-		}
-
->>>>>>> patrick
 		img {
 			margin: 0 0 1.5em 0;
 			max-width: 100%;
@@ -515,7 +380,6 @@ POSTS & CONTENT STYLES
 						a {}
 
 						img {}
-<<<<<<< HEAD
 
 					}
 
@@ -528,20 +392,6 @@ POSTS & CONTENT STYLES
 					/* gallery caption styles */
 					.gallery-caption {}
 
-=======
-
-					}
-
-					dt {}
-
-					dd {}
-
-					} /* end .gallery */
-
-					/* gallery caption styles */
-					.gallery-caption {}
-
->>>>>>> patrick
 					.size-full {}
 					.size-large {}
 					.size-medium {}
@@ -684,17 +534,10 @@ COMMENT STYLES
 		.alt {}
 		.odd {
 			background: #eee;
-<<<<<<< HEAD
 		}
 		.even {
 			background: #fefefe;
 		}
-=======
-		}
-		.even {
-			background: #fefefe;
-		}
->>>>>>> patrick
 		.parent {}
 		.comment {}
 		.children {}
@@ -917,63 +760,8 @@ FOOTER STYLES
 .footer {
 	clear: both;
 	background-color: #93BFCE;
-<<<<<<< HEAD
-	text-align: center;
-
-	.nav {
-		background-color:transparent;
-		text-align: center;
-		display:inline-block;
-
-		li {
-			border-right:1px solid #fff;
-
-			&:last-child {
-				border:none;
-			}
-
-			a {
-				background-color:transparent;
-				color:#fff;
-				font-size:21px;
-				font-family:'Lato', sans-serif;
-				font-weight:300;
-
-			}
-		}
-	}
-=======
->>>>>>> patrick
 }
 
-
-
-/*********************
-SLIDER STYLES
-*********************/
-
-.metaslider .caption-wrap{
-	height:170px;
-	top: 155px;
-	position: absolute;
-
-	background: #fff;
-	color: white;
-	line-height: 30px;
-	/*opacity: 0.4;*/
-	margin: 0;
-	display: block;
-	width: 100%;
-}
-
-.metaslider .caption{
-	display:inline-block;
-	width:600px;
-	font-family:'Lato', sans-serif;
-	font-weight:700;
-	font-size:60px;
-	line-height:60px;
-}
 	/*
 	if you checked out the link above:
 	http://www.alistapart.com/articles/organizing-mobile/
@@ -992,15 +780,8 @@ SLIDER STYLES
 		}
 
 		} /* end .footer-links */
-<<<<<<< HEAD
-=======
 
->>>>>>> patrick
 
 		.copyright {}
 
-<<<<<<< HEAD
-		.copyright {}
-=======
->>>>>>> patrick
 

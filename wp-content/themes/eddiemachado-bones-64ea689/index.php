@@ -1,31 +1,29 @@
 <?php get_header(); ?>
 
 
-			<div id="content">
+<div id="content">
 
-				<div id="inner-content" class="wrap clearfix">
+	<div id="inner-content" class="wrap clearfix">
 
-						<div id="main" class="twelvecol first clearfix" role="main">
+		<div id="main" class="twelvecol first clearfix" role="main">
 
-						<?php 
-    echo do_shortcode("[metaslider id=17]"); 
-?>
+			<?php echo do_shortcode("[metaslider id=84]"); a?>
 
-								<section class="entry-content clearfix" itemprop="articleBody">
-									<?php the_content(); ?>
-									<!-- Place somewhere in the <body> of your page -->
-								</section>
+			<section class="entry-content clearfix" itemprop="articleBody">
+				<?php the_content(); ?>
+				<!-- Place somewhere in the <body> of your page -->
+			</section>
 
-								<footer class="article-footer">
-																</footer>
+			<footer class="article-footer">
+			</footer>
 
 
-							</article>
+		</article>
 
-						</div>
+	</div>
 
-				</div>
+</div>
 
-			</div>
+</div>
 
 <?php get_footer(); ?>
