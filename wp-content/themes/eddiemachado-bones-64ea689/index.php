@@ -29,52 +29,68 @@
 					$video_url_fixed = str_replace("http://", "", $video_url);
 					$video_url_fixed = str_replace("/watch?v=", "/embed/", $video_url_fixed);
 					?>
-
-					<h1><?php echo $video_info['title']; ?></h1>
-					<br />
-					<h3><?php echo $video_info['sub_title']; ?></h3>
-					<br />
-					<?php echo $video_info['content']; ?>
-					<br />
-					<iframe width="420" height="315" src="//<?php echo $video_url_fixed ?>" frameborder="0" allowfullscreen></iframe>
-					<hr />
+					<div id="what-do-we-do">
+						<h1 class="main-title"><?php echo $video_info['title']; ?></h1>
+						<iframe class="youtube-vid" width="420" height="315" src="//<?php echo $video_url_fixed ?>" frameborder="0" allowfullscreen></iframe>
+						<br />
+						<h3 class="main-sub-title"><?php echo $video_info['sub_title']; ?></h3>
+						<br />
+						<div class="vid-content"><?php echo $video_info['content']; ?></div>
+						<br />
+					</div>
 					<?php }
 				} ?>
 
+				<div class="get-involved">
+					<?php $type = 'resources';
 
-				<?php $type = 'resources';
+					$args=array(
+						'post_type' => $type,
+						'post_status' => 'publish',
+						'posts_per_page' => -1
+						);
 
-				$args=array(
-					'post_type' => $type,
-					'post_status' => 'publish',
-					'posts_per_page' => -1
-					);
+					$resources = get_posts($args);
+					$post_count = 0;
+					if(count($resources)) {
+						foreach($resources as $resource) {
+							$resource_info = get_fields($resource->ID);
+							$post_count++;
+							if ($post_count == 1){
+								$div_class = "col-left";
+							} else if ($post_count == 2) {
+								$div_class = "col-right";
+							}
+							?>
 
-				$resources = get_posts($args);
+							<div class="<?php echo $div_class ?>">
+								<img class="sub-img" src="<?php echo $resource_info['picture']; ?>"></img>
+								<br />
+								<h1><?php echo $resource_info['title']; ?></h1>
+								<br />
+								<h3><?php echo $resource_info['sub-title']; ?></h3>
+								<br />
+								<?php echo $resource_info['content']; ?>
+								<br />
+							</div>
 
-				if(count($resources)) {
-					foreach($resources as $resource) {
-						$resource_info = get_fields($resource->ID);
+							<?php }
+						} ?>
+					</div>
+					<div class="info-content">
+						<div class="col-left">
+							<h1>News and Updates</h1>
+						</div>
+						<div class="col-right">
+							<h1>Upcoming Events</h1>
+							<?php
+							$shortcode = '';
+							echo do_shortcode('[add_eventon show_et_ft_img="no" hide_past="no" ft_event_priority="yes" event_count="3" month_incre="+1" fixed_month="3" fixed_year="2014"  etc_override="yes"]'); ?>
 
-						?>
-						<img src="<?php echo $resource_info['picture']; ?>"></img>
-						<?php echo $resource_info['title']; ?>
-						<br />
-						<?php echo $resource_info['sub_title']; ?>
-						<br />
-						<?php echo $resource_info['content']; ?>
-						<br />
-
-						<?php }
-					} ?>
-
-					<?php
-					$shortcode = '';
-					echo do_shortcode('[add_eventon show_et_ft_img="no" hide_past="no" ft_event_priority="yes" event_count="3" month_incre="+1" fixed_month="3" fixed_year="2014"  etc_override="yes"]'); ?>
-
-
+						</div>
+					</div>
 					<section class="entry-content clearfix" itemprop="articleBody">
-						<?php the_content(); ?>
+						<?php // the_content(); ?>
 						<!-- Place somewhere in the <body> of your page -->
 					</section>
 
