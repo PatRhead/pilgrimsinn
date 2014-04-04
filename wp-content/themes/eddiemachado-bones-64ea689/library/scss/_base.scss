@@ -25,7 +25,7 @@ body {
 
 #what-do-we-do{
 	background-color: #EDEDED;
-	box-shadow: 5px 0 5px #888888;
+	/* box-shadow: 5px 0 5px #888888; */
 }
 
 .vid-content{
@@ -55,11 +55,11 @@ body {
 .get-involved{
 	background-color: #F6F6F6;
 	display:inline-block;
-	box-shadow: 5px 0 5px #888888;
+	/* box-shadow: 5px 0 5px #888888; */
 }
 
 .info-content{
-	box-shadow: 5px 0 5px #888888;
+	/* box-shadow: 5px 0 5px #888888; */
 	display: flex;
 }
 
@@ -112,6 +112,95 @@ LAYOUT & GRID STYLES
 	width: 96%;
 	margin: 0 auto;
 }
+
+.getheader {
+	background-color:#93BFCE;
+	height:140px;
+	z-index: 1;
+	top:-140px;
+	position:relative;
+	opacity:0.75;
+
+	div{
+		display:inline-block;
+		height:140px;
+	}
+
+	h1{
+		font:2.8em 'Lato', sans-serif;
+		font-weight: 300;
+		color:#fff;
+		margin-top:40px;
+	}
+
+	a {
+		text-decoration: none;
+		display:inline-block;
+		width:33.159%;
+		text-align: center;
+		border-right:1px solid #fff;
+
+		&:last-child{
+			border-right:none;
+		}
+
+		&:hover {
+			background-color:#9DB363;
+		}
+	}
+}
+
+.main-title {
+	padding:50px 0px 0px 95px;
+}
+
+.main-sub-title {
+	padding:10px 0px 10px 95px;
+}
+
+.vid-content{
+	margin:0px 0px 30px 0px;
+	padding:0px 0px 0px 40px;
+}
+
+.youtube-vid {
+	margin-right:95px;
+	margin-left:40px;
+}
+
+.col-right {
+	padding:30px 95px 0px 20px;
+	margin:30px 0px 25px 0px;
+
+	h3 {
+		padding:10px 0px 10px 0px;
+	}
+}
+
+.col-left {
+	padding:30px 20px 0px 95px;
+	margin:30px 0px 25px 0px;
+
+	h3 {
+		padding:10px 0px 10px 0px;
+	}
+}
+
+.info-content{
+	background-color:#D1D3D4;
+
+	.col-left ul{
+		list-style-image:url('../images/leaf.png');
+		margin-left: 25px;
+	}
+}
+
+
+/* Event Cal Overrides */
+.ajde_evcal_calendar #evcal_head.calendar_header #evcal_cur, .ajde_evcal_calendar .evcal_month_line p {
+	color:#fff;
+}
+
 
 /*********************
 LINK STYLES
@@ -329,7 +418,7 @@ and more scalable.
 
 			} /* end .nav */
 
-/* Get Involved/informed/help */ 
+			/* Get Involved/informed/help */
 
 
 
