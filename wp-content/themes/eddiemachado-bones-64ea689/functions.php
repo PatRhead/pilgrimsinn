@@ -182,30 +182,6 @@ function bones_wpsearch($form) {
 
 add_action( 'init', 'create_post_type' );
 function create_post_type() {
-	register_post_type( 'videos',
-		array(
-			'labels' => array(
-				'name' => __( 'Videos' ),
-				'singular_name' => __( 'Video' ),
-				'add_new' => 'Add New',
-				'add_new_item' => 'Add New Video',
-				'edit' => 'Edit',
-				'edit_item' => 'Edit Video',
-				'new_item' => 'New Video',
-				'view' => 'View',
-				'view_item' => 'View Video',
-				'search_items' => 'Search Videos',
-				'not_found' => 'No Videos found',
-				'not_found_in_trash' => 'No Videos found in Trash',
-				'parent' => 'Parent Video'
-				),
-			'public' => true,
-			'menu_position' => 15,
-			'supports' => array( 'title', 'comments', /*'editor',*/ 'thumbnail', /*'custom-fields'*/ ),
-			'has_archive' => true,
-			/*'rewrite' => array('slug' => 'resources')*/
-			)
-		);
 	register_post_type( 'resources',
 		array(
 			'labels' => array(
@@ -223,11 +199,12 @@ function create_post_type() {
 				'not_found_in_trash' => 'No Resources found in Trash',
 				'parent' => 'Parent Resource'
 				),
+			//'taxonomies' => array('category'),
 			'public' => true,
 			'menu_position' => 15,
-			'supports' => array( 'title', 'comments', /*'editor',*/ 'thumbnail', /*'custom-fields'*/ ),
+			'supports' => array( 'title', 'comments', 'thumbnail', /*'custom-fields'*/ ),
 			'has_archive' => true,
-			/*'rewrite' => array('slug' => 'resources')*/
+			'rewrite' => array('slug' => 'resources')
 			)
 		);
 }

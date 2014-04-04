@@ -234,6 +234,7 @@ class MetaSliderPlugin {
         // localise the JS
         wp_localize_script( 'metaslider-admin-script', 'metaslider', array(
             'url' => __("URL", "metaslider"),
+            'sub-title' => __("Sub-Caption", "metaslider"),
             'caption' => __("Caption", "metaslider"),
             'new_window' => __("New Window", "metaslider"),
             'confirm' => __("Are you sure?", "metaslider"),
