@@ -27,9 +27,6 @@ Template Name: Get Involved
 				</div>
 			</a>
 		</div>
-		<div id="main" class="fourcol first clearfix" role="main">
-			<p>Abc</p>
-		</div>
 		<div id="main" class="eightcol first clearfix" role="main">
 
 			<?php the_field('get_involved_title', $post->ID); ?>
@@ -41,7 +38,11 @@ Template Name: Get Involved
 		</div>
 		<br />
 		<div id="menu">
+
 			<ul>
+				<li class="sub-menu-title">
+					<?php the_field('menu_title', $post->ID) ?>
+				</li>
 				<?php
 				// What I have to do now is add the fucntionalty to remove the content-hidden class on the content when the user clicks that menu item
 				// So it will check for the menu_title in the contnet, and if it matched then add the show class, THEN remove the hidden class.
