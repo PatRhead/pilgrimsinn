@@ -55,9 +55,33 @@ background-repeat: repeat-x;
 .headerimg{
 	margin: 0 auto;
 	width: 1140px;
+<<<<<<< HEAD
 	
 }
 .headerimg img {
 	width: 1140px !important;
 
 }
+=======
+
+}
+.headerimg img {
+	width: 1140px !important;
+}
+
+.content-hidden {
+	display: none;
+}
+
+.content-visible{
+	display: inline;
+}
+
+.active{
+	background-color: red;
+}
+
+.inactive{
+	background-color: none;
+}
+>>>>>>> patrick
