@@ -36,73 +36,142 @@ jQuery(document).ready(function($) {
 	it, so be sure to research and find the one
 	that works for you best.
 	*/
-	
+
 	/* getting viewport width */
 	var responsive_viewport = $(window).width();
-	
+
 	/* if is below 481px */
 	if (responsive_viewport < 481) {
-	
+
 	} /* end smallest screen */
-	
+
 	/* if is larger than 481px */
 	if (responsive_viewport > 481) {
-	
+
 	} /* end larger than 481px */
-	
+
 	/* if is above or equal to 768px */
 	if (responsive_viewport >= 768) {
-	
+
 		/* load gravatars */
 		$('.comment img[data-gravatar]').each(function(){
 			$(this).attr('src',$(this).attr('data-gravatar'));
 		});
-		
+
 	}
-	
+
 	/* off the bat large screen actions */
 	if (responsive_viewport > 1030) {
-	
+
 	}
-	
-	
+
+
 	// add all your scripts here
-	
- 
+
+	//Switches the classes associated with sub-menu items and sub-content items
+	jQuery( ".sub-menu-item" ).click(function() {
+		var buttonPress = jQuery(this).attr("id");
+		switch (buttonPress)
+		{
+			case "sub-menu-1":
+			jQuery('.active').addClass("inactive").removeClass("active");
+			jQuery('#sub-menu-1').removeClass("inactive").addClass("active");
+
+			jQuery('.content-visible').addClass("content-hidden").removeClass("content-visible");
+			jQuery('#sub-content-1').removeClass("content-hidden").addClass("content-visible");
+			break;
+			case "sub-menu-2":
+			jQuery('.active').addClass("inactive").removeClass("active");
+			jQuery('#sub-menu-2').removeClass("inactive").addClass("active");
+			jQuery('.content-visible').addClass("content-hidden").removeClass("content-visible");
+			jQuery('#sub-content-2').removeClass("content-hidden").addClass("content-visible");
+			break;
+			case "sub-menu-3":
+			jQuery('.active').addClass("inactive").removeClass("active");
+			jQuery('#sub-menu-3').removeClass("inactive").addClass("active");
+			jQuery('.content-visible').addClass("content-hidden").removeClass("content-visible");
+			jQuery('#sub-content-3').removeClass("content-hidden").addClass("content-visible");
+			break;
+			case "sub-menu-4":
+			jQuery('.active').addClass("inactive").removeClass("active");
+			jQuery('#sub-menu-4').removeClass("inactive").addClass("active");
+			jQuery('.content-visible').addClass("content-hidden").removeClass("content-visible");
+			jQuery('#sub-content-4').removeClass("content-hidden").addClass("content-visible");
+			break;
+			case "sub-menu-5":
+			jQuery('.active').addClass("inactive").removeClass("active");
+			jQuery('#sub-menu-5').removeClass("inactive").addClass("active");
+			jQuery('.content-visible').addClass("content-hidden").removeClass("content-visible");
+			jQuery('#sub-content-5').removeClass("content-hidden").addClass("content-visible");
+			break;
+			case "sub-menu-6":
+			jQuery('.active').addClass("inactive").removeClass("active");
+			jQuery('#sub-menu-6').removeClass("inactive").addClass("active");
+			jQuery('.content-visible').addClass("content-hidden").removeClass("content-visible");
+			jQuery('#sub-content-6').removeClass("content-hidden").addClass("content-visible");
+			break;
+			case "sub-menu-7":
+			jQuery('.active').addClass("inactive").removeClass("active");
+			jQuery('#sub-menu-7').removeClass("inactive").addClass("active");
+			jQuery('.content-visible').addClass("content-hidden").removeClass("content-visible");
+			jQuery('#sub-content-7').removeClass("content-hidden").addClass("content-visible");
+			break;
+			case "sub-menu-8":
+			jQuery('.active').addClass("inactive").removeClass("active");
+			jQuery('#sub-menu-8').removeClass("inactive").addClass("active");
+			jQuery('.content-visible').addClass("content-hidden").removeClass("content-visible");
+			jQuery('#sub-content-8').removeClass("content-hidden").addClass("content-visible");
+			break;
+			case "sub-menu-9":
+			jQuery('.active').addClass("inactive").removeClass("active");
+			jQuery('#sub-menu-9').removeClass("inactive").addClass("active");
+			jQuery('.content-visible').addClass("content-hidden").removeClass("content-visible");
+			jQuery('#sub-content-9').removeClass("content-hidden").addClass("content-visible");
+			break;
+			case "sub-menu-10":
+			jQuery('.active').addClass("inactive").removeClass("active");
+			jQuery('#sub-menu-10').removeClass("inactive").addClass("active");
+			jQuery('.content-visible').addClass("content-hidden").removeClass("content-visible");
+			jQuery('#sub-content-10').removeClass("content-hidden").addClass("content-visible");
+			break;
+			default:
+		}
+	});
+
 }); /* end of as page load scripts */
 
 
 /*! A fix for the iOS orientationchange zoom bug.
  Script by @scottjehl, rebound by @wilto.
  MIT License.
-*/
-(function(w){
+ */
+ (function(w){
 	// This fix addresses an iOS bug, so return early if the UA claims it's something else.
 	if( !( /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1 ) ){ return; }
 	var doc = w.document;
 	if( !doc.querySelector ){ return; }
 	var meta = doc.querySelector( "meta[name=viewport]" ),
-		initialContent = meta && meta.getAttribute( "content" ),
-		disabledZoom = initialContent + ",maximum-scale=1",
-		enabledZoom = initialContent + ",maximum-scale=10",
-		enabled = true,
-		x, y, z, aig;
+	initialContent = meta && meta.getAttribute( "content" ),
+	disabledZoom = initialContent + ",maximum-scale=1",
+	enabledZoom = initialContent + ",maximum-scale=10",
+	enabled = true,
+	x, y, z, aig;
 	if( !meta ){ return; }
 	function restoreZoom(){
 		meta.setAttribute( "content", enabledZoom );
 		enabled = true; }
-	function disableZoom(){
-		meta.setAttribute( "content", disabledZoom );
-		enabled = false; }
-	function checkTilt( e ){
-		aig = e.accelerationIncludingGravity;
-		x = Math.abs( aig.x );
-		y = Math.abs( aig.y );
-		z = Math.abs( aig.z );
+		function disableZoom(){
+			meta.setAttribute( "content", disabledZoom );
+			enabled = false; }
+			function checkTilt( e ){
+				aig = e.accelerationIncludingGravity;
+				x = Math.abs( aig.x );
+				y = Math.abs( aig.y );
+				z = Math.abs( aig.z );
 		// If portrait orientation and in one of the danger zones
 		if( !w.orientation && ( x > 7 || ( ( z > 6 && y < 8 || z < 8 && y > 6 ) && x > 5 ) ) ){
 			if( enabled ){ disableZoom(); } }
-		else if( !enabled ){ restoreZoom(); } }
-	w.addEventListener( "orientationchange", restoreZoom, false );
-	w.addEventListener( "devicemotion", checkTilt, false );
-})( this );
+			else if( !enabled ){ restoreZoom(); } }
+			w.addEventListener( "orientationchange", restoreZoom, false );
+			w.addEventListener( "devicemotion", checkTilt, false );
+		})( this );

@@ -15,7 +15,7 @@ Template Name: Home Page
 			<?php echo do_shortcode("[metaslider id=84]"); ?>
 
 			<div class="getheader">
-				<a href="">
+				<a href="<?php the_permalink(); ?>/get-informed">
 					<div id="getinformed">
 						<h1>Get Informed</h1>
 					</div>
@@ -25,7 +25,7 @@ Template Name: Home Page
 						<h1>Get Involved</h1>
 					</div>
 				</a>
-				<a href="">
+				<a href="<?php the_permalink(); ?>/get-help">
 					<div id="gethelp">
 						<h1>Get Help</h1>
 					</div>
