@@ -11,24 +11,21 @@ Template Name: Get Involved
 	<div id="inner-content secondary" class="wrap clearfix">
 		<div class="headerimg"><img src="http://spring2014.hiveu.me/pi/patrick/wp-content/uploads/2014/04/IMG_1524-1196x755.jpg" alt="test_header" width="" height="" /></div>
 		<div class="getheader">
-			<a href="">
+			<a href="<?php the_permalink(); ?>/get-informed">
 				<div id="getinformed">
 					<h1>Get Informed</h1>
 				</div>
 			</a>
-			<a href="">
+			<a href="<?php the_permalink(); ?>/get-involved">
 				<div id="getinvolved">
 					<h1>Get Involved</h1>
 				</div>
 			</a>
-			<a href="">
+			<a href="<?php the_permalink(); ?>/get-help">
 				<div id="gethelp">
 					<h1>Get Help</h1>
 				</div>
 			</a>
-		</div>
-		<div id="main" class="fourcol first clearfix" role="main">
-			<p>Abc</p>
 		</div>
 		<div id="main" class="eightcol first clearfix" role="main">
 
@@ -41,7 +38,11 @@ Template Name: Get Involved
 		</div>
 		<br />
 		<div id="menu">
+
 			<ul>
+				<li class="sub-menu-title">
+					<?php the_field('menu_title', $post->ID) ?>
+				</li>
 				<?php
 				// What I have to do now is add the fucntionalty to remove the content-hidden class on the content when the user clicks that menu item
 				// So it will check for the menu_title in the contnet, and if it matched then add the show class, THEN remove the hidden class.
