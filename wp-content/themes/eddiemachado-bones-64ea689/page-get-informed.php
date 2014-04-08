@@ -12,11 +12,23 @@ Template Name: Get Informed
 
 		<div id="main" class="twelvecol first clearfix" role="main">
 
-			<?php the_field('get_involved_title', $post->ID); ?>
-			<br />
-			<?php the_field('get_involved_sub_title', $post->ID); ?>
-			<br />
-			<?php the_field('get_involved_contnet', $post->ID); ?>
+			<div class="getheader">
+				<a href="<?php the_permalink(); ?>/get-informed">
+					<div id="getinformed">
+						<h1>Get Informed</h1>
+					</div>
+				</a>
+				<a href="<?php the_permalink(); ?>/get-involved">
+					<div id="getinvolved">
+						<h1>Get Involved</h1>
+					</div>
+				</a>
+				<a href="<?php the_permalink(); ?>/get-help">
+					<div id="gethelp">
+						<h1>Get Help</h1>
+					</div>
+				</a>
+			</div>
 
 		</div>
 
