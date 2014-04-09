@@ -204,7 +204,7 @@ function create_post_type() {
 			'menu_position' => 15,
 			'supports' => array( 'title', 'comments', 'thumbnail', /*'custom-fields'*/ ),
 			'has_archive' => true,
-			'rewrite' => array('slug' => 'resources')
+			 'rewrite' => array('slug' => 'resources')
 			)
 		);
 }
