@@ -12,26 +12,9 @@ Template Name: Home Page
 
 		<div id="main" class="twelvecol first clearfix" role="main">
 
-			<?php echo do_shortcode("[metaslider id=84]"); ?>
+			<?php echo do_shortcode("[metaslider id=84]");
+			include('main-cta.php');
 
-			<div class="getheader">
-				<a href="<?php the_permalink(); ?>/get-informed">
-					<div id="getinformed">
-						<h1>Get Informed</h1>
-					</div>
-				</a>
-				<a href="<?php the_permalink(); ?>/get-involved">
-					<div id="getinvolved">
-						<h1>Get Involved</h1>
-					</div>
-				</a>
-				<a href="<?php the_permalink(); ?>/get-help">
-					<div id="gethelp">
-						<h1>Get Help</h1>
-					</div>
-				</a>
-			</div>
-			<?php
 			//checks for http:// and watch? in video URL
 			$video_url = get_field('video_video_area', $post->ID);
 			$video_url_fixed = str_replace("https://", "", $video_url);
