@@ -12,8 +12,10 @@ Template Name: Home Page
 
 		<div id="main" class="twelvecol first clearfix" role="main">
 
-			<?php echo do_shortcode("[metaslider id=84]"); ?>
+			<?php echo do_shortcode("[metaslider id=84]");
+			include('main-cta.php');
 
+<<<<<<< HEAD
 			<div class="getheader">
 				<a href="<?php the_permalink(); ?>get-informed">
 					<div id="getinformed">
@@ -32,6 +34,8 @@ Template Name: Home Page
 				</a>
 			</div>
 			<?php
+=======
+>>>>>>> patrick
 			//checks for http:// and watch? in video URL
 			$video_url = get_field('video_video_area', $post->ID);
 			$video_url_fixed = str_replace("https://", "", $video_url);

@@ -9,7 +9,10 @@ Template Name: Get Informed
 <div id="content">
 
 	<div id="inner-content" class="wrap clearfix">
-
+		<?php
+			// Gets the three main call to action buttons
+		include('main-cta.php');
+		?>
 		<div id="main" class="twelvecol first clearfix" role="main">
 
 			<div class="getheader">
