@@ -17,7 +17,6 @@
 		<meta name="HandheldFriendly" content="True">
 		<meta name="MobileOptimized" content="320">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
 		<link href='http://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic,700italic' rel='stylesheet' type='text/css'>
 
@@ -51,7 +50,7 @@
 				<div id="inner-header" class="wrap clearfix">
 
 					<?php // to use a image just replace the bloginfo('name') with your img src and remove the surrounding <p> ?>
-					<a href="<?php echo home_url(); ?>" rel="nofollow"><img src="./wp-content/themes/eddiemachado-bones-64ea689/library/images/logo.png"></a>
+					<a href="<?php echo home_url(); ?>" rel="nofollow"><img src="http://spring2014.hiveu.me/pi/patrick/wp-content/uploads/2014/04/logo.png"></a>
 
 					<?php // if you'd like to use the site description you can un-comment it below ?>
 					<?php // bloginfo('description'); ?>

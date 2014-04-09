@@ -1,5 +1,5 @@
-<?php get_header(); ?>
-
+<?php get_header(); 
+?>
 
 <div id="content">
 
@@ -8,23 +8,10 @@
 		<div id="main" class="twelvecol first clearfix" role="main">
 
 			<?php echo do_shortcode("[metaslider id=84]"); ?>
-			<div class="getheader">
-				<a href="">
-					<div id="getinformed">
-						<h1>Get Informed</h1>
-					</div>
-				</a>
-				<a href="">
-					<div id="getinvolved">
-						<h1>Get Involved</h1>
-					</div>
-				</a>
-				<a href="">
-					<div id="gethelp">
-						<h1>Get Help</h1>
-					</div>
-				</a>
-			</div>
+			<?php
+		include('main-cta.php');
+	
+		?>
 
 			<?php $type = 'videos';
 
@@ -49,9 +36,7 @@
 					<div id="what-do-we-do">
 						<h1 class="main-title"><?php echo $video_info['title']; ?></h1>
 						<iframe class="youtube-vid" width="420" height="315" src="<?php echo $video_url_fixed ?>" frameborder="0" allowfullscreen></iframe>
-						<br />
 						<h3 class="main-sub-title"><?php echo $video_info['sub_title']; ?></h3>
-						<br />
 						<div class="vid-content"><?php echo $video_info['content']; ?></div>
 						<br />
 					</div>

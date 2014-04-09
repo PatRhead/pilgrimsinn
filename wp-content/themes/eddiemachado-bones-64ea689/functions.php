@@ -180,5 +180,34 @@ function bones_wpsearch($form) {
 } // don't remove this bracket!
 
 
+add_action( 'init', 'create_post_type' );
+function create_post_type() {
+	register_post_type( 'resources',
+		array(
+			'labels' => array(
+				'name' => __( 'Resources' ),
+				'singular_name' => __( 'Resource' ),
+				'add_new' => 'Add New',
+				'add_new_item' => 'Add New Resource',
+				'edit' => 'Edit',
+				'edit_item' => 'Edit Resource',
+				'new_item' => 'New Resource',
+				'view' => 'View',
+				'view_item' => 'View Resource',
+				'search_items' => 'Search Resources',
+				'not_found' => 'No Resources found',
+				'not_found_in_trash' => 'No Resources found in Trash',
+				'parent' => 'Parent Resource'
+				),
+			//'taxonomies' => array('category'),
+			'public' => true,
+			'menu_position' => 15,
+			'supports' => array( 'title', 'comments', 'thumbnail', /*'custom-fields'*/ ),
+			'has_archive' => true,
+			 'rewrite' => array('slug' => 'resources')
+			)
+		);
+}
+
 
 ?>

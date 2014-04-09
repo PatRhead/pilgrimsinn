@@ -4,15 +4,18 @@ Template Name: Get Involved
 */
 ?>
 
-<?php get_header(); ?>
+<?php get_header();
+echo "<style>.getheader {margin-top:-146px;}#involved {background-color: #9DB363</style>" ?>
 
 <div id="content">
 
-	<div id="inner-content secondary" class="wrap clearfix">
+	<div id="inner-content-secondary" class="wrap clearfix">
 		<div class="headerimg"><img src="http://spring2014.hiveu.me/pi/patrick/wp-content/uploads/2014/04/IMG_1524-1196x755.jpg" alt="test_header" width="" height="" /></div>
 		<?php
 		include('main-cta.php');
+	
 		?>
+		<!--
 		<div id="main" class="eightcol first clearfix" role="main">
 
 			<?php the_field('get_involved_title', $post->ID); ?>
@@ -21,8 +24,8 @@ Template Name: Get Involved
 			<br />
 			<?php the_field('get_involved_contnet', $post->ID); ?>
 
-		</div>
-		<br />
+		</div>-->
+		<div class="threecol">
 		<div id="menu">
 
 			<ul>
@@ -48,6 +51,8 @@ Template Name: Get Involved
 				?>
 			</ul>
 		</div>
+		</div>
+		<div class="ninecol">
 		<?php
 
 		if( have_rows('page_area') ):
@@ -63,6 +68,7 @@ Template Name: Get Involved
 		else :
 			endif;
 		?>
+	</div>
 	</div>
 
 </div>

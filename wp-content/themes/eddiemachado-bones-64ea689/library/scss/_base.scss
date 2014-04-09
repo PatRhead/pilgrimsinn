@@ -63,6 +63,10 @@ body {
 	display: flex;
 }
 
+.content-sub-title{
+
+}
+
 /********************
 WORDPRESS BODY CLASSES
 style a page via class
@@ -981,6 +985,41 @@ FOOTER STYLES
 	}
 }
 
+/*
+	THIS CONTENT NEEDS TO BE MERGED WITH THE REST OF THE FILE
+*/
+#container {
+background: url("../images/bg.jpg");
+background-repeat: repeat-x;
+
+}
+.info-content .col-left, .info-content .col-right{
+	margin-top: 0px; padding-top: 10px;
+}
+.info-content {
+	padding-bottom: 12px;
+}
+.info-content .col-left li {
+	font-style: italic;
+	font-size: 1.4em;
+	line-height: 1.6em;
+}
+.info-content .col-left a {
+	text-decoration: none;
+	color: #575757;
+}
+.info-content .col-left a:hover {
+	color: #797979;
+}
+
+.get-involved {
+	padding-bottom: 40px;
+}
+
+
+/*
+	END CONTNET THAT NEEDS TO BE ADDED IN
+*/
 
 	/*
 	if you checked out the link above:
