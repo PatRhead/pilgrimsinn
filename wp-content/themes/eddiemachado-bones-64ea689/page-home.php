@@ -24,11 +24,11 @@ Template Name: Home Page
 			<div id="what-do-we-do">
 				<h1 class="main-title"><?php the_field('video_title', $post->ID); ?></h1>
 				<iframe class="youtube-vid" width="420" height="315" src="//<?php echo $video_url_fixed ?>" frameborder="0" allowfullscreen></iframe>
-				<br />
 				<h3 class="main-sub-title"><?php the_field('video_sub_title', $post->ID); ?></h3>
-				<br />
 				<div class="vid-content"><?php the_field('video_content', $post->ID); ?></div>
+				<br /><br />
 				<br />
+
 			</div>
 
 
@@ -76,7 +76,7 @@ Template Name: Home Page
 							<h1>Upcoming Events</h1>
 							<?php
 							$shortcode = '';
-							echo do_shortcode('[add_eventon show_et_ft_img="no" hide_past="no" ft_event_priority="yes" event_count="3" month_incre="+1" fixed_month="3" fixed_year="2014"  etc_override="yes"]'); ?>
+							echo do_shortcode('[add_eventon show_et_ft_img="no" hide_past="no" ft_event_priority="yes" event_count="3" etc_override="yes"]'); ?>
 
 						</div>
 					</div>
