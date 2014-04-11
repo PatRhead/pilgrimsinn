@@ -38,7 +38,6 @@
 						<iframe class="youtube-vid" width="420" height="315" src="<?php echo $video_url_fixed ?>" frameborder="0" allowfullscreen></iframe>
 						<h3 class="main-sub-title"><?php echo $video_info['sub_title']; ?></h3>
 						<div class="vid-content"><?php echo $video_info['content']; ?></div>
-						<br />
 					</div>
 					<?php }
 				} ?>

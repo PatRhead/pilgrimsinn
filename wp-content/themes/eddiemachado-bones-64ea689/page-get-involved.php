@@ -10,21 +10,11 @@ echo "<style>.getheader {margin-top:-146px;}#involved {background-color: #9DB363
 <div id="content">
 
 	<div id="inner-content-secondary" class="wrap clearfix">
-		<div class="headerimg"><img src="http://spring2014.hiveu.me/pi/patrick/wp-content/uploads/2014/04/IMG_1524-1196x755.jpg" alt="test_header" width="" height="" /></div>
+		<div class="headerimg"><img src="http://spring2014.hiveu.me/pi/patrick/wp-content/uploads/2014/04/3.jpg" alt="test_header" width="" height="" /></div>
 		<?php
 		include('main-cta.php');
-	
+
 		?>
-		<!--
-		<div id="main" class="eightcol first clearfix" role="main">
-
-			<?php the_field('get_involved_title', $post->ID); ?>
-			<br />
-			<?php the_field('get_involved_sub_title', $post->ID); ?>
-			<br />
-			<?php the_field('get_involved_contnet', $post->ID); ?>
-
-		</div>-->
 		<div class="threecol">
 		<div id="menu">
 
@@ -33,8 +23,6 @@ echo "<style>.getheader {margin-top:-146px;}#involved {background-color: #9DB363
 					<?php the_field('menu_title', $post->ID) ?>
 				</li>
 				<?php
-				// What I have to do now is add the fucntionalty to remove the content-hidden class on the content when the user clicks that menu item
-				// So it will check for the menu_title in the contnet, and if it matched then add the show class, THEN remove the hidden class.
 				if( have_rows('page_area') ):
 					$x = 0;
 				while ( have_rows('page_area') ) : the_row();

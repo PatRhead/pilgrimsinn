@@ -5,7 +5,7 @@
 					<nav role="navigation">
 						<?php bones_footer_links(); ?>
 					</nav>
-					<div id="footer-content">This is content that will be in the footer.</div>
+					<div id="footer-content">© 2014 Pilgrims' Inn, Rock Hill S.C.</div>
 		<!--			<p class="source-org copyright">&copy; <?php echo date('Y'); ?> <?php bloginfo( 'name' ); ?>.</p> -->
 
 				</div>
