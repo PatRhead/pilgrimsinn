@@ -73,49 +73,53 @@ Template Name: Home Page
 				<div class="col-left">
 					<h1>News and Updates</h1>
 					<ul>
-						<?php
+						<?php $type = 'updates';
 
-						if( have_rows('news_and_updates') ):
+						$args=array(
+							'post_type' => $type,
+							'post_status' => 'publish',
+							'posts_per_page' => -1,
+							'meta_key'		=> 'event_date',
+							'orderby'		=> 'meta_value_num',
+							'order'			=> 'DESC'
+							);
 
-							while ( have_rows('news_and_updates') ) : the_row();
-						?>
-						<li>
-							<a href="<?php the_sub_field('news_and_updates_link');  ?>"><?php the_sub_field('news_and_updates_title'); ?></a>
-						</li>
-						<?php
+						$updates = get_posts($args);
 
-						endwhile;
+						if(count($updates)) {
+							foreach($updates as $update) {
+								$update_info = get_fields($update->ID);
+								?>
+								<a target="_blank" href="<?php echo $update_info['link']; ?>"><li><?php echo $update_info['title']; ?></li></a>
+								<br />
+								<?php }
+							} ?>
+							</ul>
+							<a href="http://spring2014.hiveu.me/pi/patrick/news-updates/">View All</a>
+							</div>
+							<div class="col-right">
+								<h1>Upcoming Events</h1>
+								<?php
+								$shortcode = '';
+								echo do_shortcode('[add_eventon show_et_ft_img="no" hide_past="no" ft_event_priority="yes" event_count="3" etc_override="yes"]'); ?>
 
-						else :
-
-							endif;
-
-						?>
-						<ul>
+							</div>
 						</div>
-						<div class="col-right">
-							<h1>Upcoming Events</h1>
-							<?php
-							$shortcode = '';
-							echo do_shortcode('[add_eventon show_et_ft_img="no" hide_past="no" ft_event_priority="yes" event_count="3" etc_override="yes"]'); ?>
+						<section class="entry-content clearfix" itemprop="articleBody">
+							<?php // the_content(); ?>
+							<!-- Place somewhere in the <body> of your page -->
+						</section>
 
-						</div>
-					</div>
-					<section class="entry-content clearfix" itemprop="articleBody">
-						<?php // the_content(); ?>
-						<!-- Place somewhere in the <body> of your page -->
-					</section>
-
-					<footer class="article-footer">
-					</footer>
+						<footer class="article-footer">
+						</footer>
 
 
-				</article>
+					</article>
+
+				</div>
 
 			</div>
 
 		</div>
 
-	</div>
-
-	<?php get_footer(); ?>
+		<?php get_footer(); ?>

@@ -207,6 +207,31 @@ function create_post_type() {
 			 'rewrite' => array('slug' => 'resources')
 			)
 		);
+	register_post_type( 'updates',
+		array(
+			'labels' => array(
+				'name' => __( 'News & Updates' ),
+				'singular_name' => __( 'News & Updates' ),
+				'add_new' => 'Add New',
+				'add_new_item' => 'Add New News & Updates',
+				'edit' => 'Edit',
+				'edit_item' => 'Edit News & Updates',
+				'new_item' => 'New News & Updates',
+				'view' => 'View',
+				'view_item' => 'View News & Updates',
+				'search_items' => 'Search News & Updates',
+				'not_found' => 'No News & Updates found',
+				'not_found_in_trash' => 'No News & Updates found in Trash',
+				'parent' => 'Parent News & Updates'
+				),
+			//'taxonomies' => array('category'),
+			'public' => true,
+			'menu_position' => 15,
+			'supports' => array( 'title', 'comments', 'thumbnail', /*'custom-fields'*/ ),
+			'has_archive' => true,
+			 'rewrite' => array('slug' => 'Events')
+			)
+		);
 }
 
 

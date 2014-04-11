@@ -10,7 +10,7 @@ echo "<style>.getheader {margin-top:-146px;}#help {background-color: #9DB363</st
 <div id="content">
 
 	<div id="inner-content-secondary" class="wrap clearfix">
-		<div class="headerimg"><img src="http://spring2014.hiveu.me/pi/patrick/wp-content/uploads/2014/04/IMG_1524-1196x755.jpg" alt="test_header" width="" height="" /></div>
+		<div class="headerimg"><img src="http://spring2014.hiveu.me/pi/patrick/wp-content/uploads/2014/04/2.jpg" alt="test_header" width="" height="" /></div>
 		<?php
 		include('main-cta.php');
 	
