@@ -163,6 +163,8 @@
 	}
 	.gallery-item img {
 		margin: 0 20px;
+		width: 175px;
+		height: 100%;
 	}
 	.gallery-item img:hover {
 		opacity:0.4;
@@ -173,9 +175,10 @@
 		max-width: 740px;
 		/* background-color: #E6E7E8; */
 		padding: 4.324324324324%;
+		position: relative;
 	}
 	.ninecol.photo {
-		margin-left:10.964912280702%;
+		margin-left:0;
 	}
 
 	#footer-content{
@@ -211,3 +214,8 @@
 		display: block;
 		line-height: 58px;
 	}
+	#inner-content, #inner-content-secondary, .footer, .header {
+		box-shadow: 3px 0px 20px 0px rgba(50, 50, 50, 0.59),-3px 0px 20px 0px rgba(50, 50, 50, 0.59);
+	}
+
+

@@ -202,7 +202,7 @@ function create_post_type() {
 			//'taxonomies' => array('category'),
 			'public' => true,
 			'menu_position' => 15,
-			'supports' => array( 'title', 'comments', 'thumbnail', /*'custom-fields'*/ ),
+			'supports' => array( 'title', 'comments', 'thumbnail', 'category' /*'custom-fields'*/ ),
 			'has_archive' => true,
 			 'rewrite' => array('slug' => 'resources')
 			)
