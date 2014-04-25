@@ -10,10 +10,10 @@ echo "<style>.getheader {margin-top:-146px;}</style>" ?>
 <div id="content">
 
 	<div id="inner-content-secondary" class="wrap clearfix">
-		<div class="headerimg"><img src="http://spring2014.hiveu.me/pi/patrick/wp-content/uploads/2014/04/A.jpg" alt="test_header" width="" height="" /></div>
+		<div class="headerimg"><img src="<?php echo the_field('header_image', $post->ID) ?>" alt="" width="" height="" /></div>
 		<?php
 		include('main-cta.php');
-	
+
 		?>
 		<div class="threecol">
 			<div id="menu">
