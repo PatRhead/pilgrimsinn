@@ -292,6 +292,9 @@ background-repeat: repeat-x;
 	.headerimg img {
 		max-width: 100%;
 	}
+	
+/*Media Queries-- yes there are a lot, but I wanted to get it done quickly and make it work!*/
+	
 @media only screen and (min-width: 1186px){
 	.header, .footer {
 		width: 1140px;
@@ -305,11 +308,7 @@ background-repeat: repeat-x;
 			width:30%;
 		}
 	}
-@media only screen and (min-width:768px) and (max-width:775px) {
-	.threecol {
-		width: 100%;
-	}
-}
+
 @media only screen and (min-width: 781px) and (max-width:890px){
 .header, .footer {
 		width: 95.9%;
@@ -346,6 +345,12 @@ background-repeat: repeat-x;
 		width: 53.309392%;
 	}
 }
+@media only screen and (min-width:768px) and (max-width:775px) {
+	.threecol {
+		width: 100%;
+	}
+	
+}
 @media only screen and (min-width:741px) and (max-width:815px){
 	.getheader h1{
 		font-size: 1.8em;
@@ -353,6 +358,23 @@ background-repeat: repeat-x;
 	.ninecol {
 		
 		width: 55.309392%;
+	}
+	.youtube-vid{
+		margin:0 auto;
+		float: none;
+		display: inherit;
+	}
+	.main-title {
+		padding-left: 0px;
+				text-align: center;
+
+	}
+	.main-sub-title{
+		padding:20px 80px 0px 80px;
+		text-align: center;
+	}
+	.vid-content {
+		padding: 0px 80px;
 	}
 } 
 @media only screen and (min-width: 641px) and (max-width:780px){
@@ -588,5 +610,21 @@ background-repeat: repeat-x;
 		margin: 0 auto;
 	}
 }
+/*For mobile navigation*/ 
 
+@media only screen and (max-width:787px){
+	.header {
+		overflow: visible;
+	}
+	#menu-main-nav a{
+		font-size: 1.3em;
 
+	}
+
+	}
+
+@media only screen and (max-width:767px){
+	#menu-main-nav {
+		padding-top: 0px;
+	}
+}
