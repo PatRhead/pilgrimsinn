@@ -4,12 +4,7 @@ Template Name: Get Involved
 */
 ?>
 
-<?php get_header();
-echo "<style>.getheader {margin-top:-146px;} #informed {background-color: #9DB363;}
-
-</style>"
-
-?>
+<?php get_header(); ?>
 
 <div id="content">
 
