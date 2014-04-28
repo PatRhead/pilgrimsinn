@@ -29,7 +29,6 @@ Template Name: News & Updates
 					$update_info = get_fields($update->ID);
 					?>
 					<a target="_blank" href="<?php echo $update_info['link']; ?>"><?php echo $update_info['title']; ?></a>
-					<br />
 					<?php }
 				} ?>
 			</div>
