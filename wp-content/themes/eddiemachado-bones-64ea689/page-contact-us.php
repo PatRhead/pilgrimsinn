@@ -5,7 +5,9 @@ Template Name: Contact Us
 ?>
 
 <?php get_header();
-echo "<style>#menu-item-241 a {color: #9DB363</style>" ?>
+echo "<style>.getheader {margin-top:-146px;} #menu-item-241 a {color: #9DB363</style>" ?>
+
+</style>
 
 <div id="content">
 
