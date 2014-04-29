@@ -67,9 +67,9 @@ background-repeat: repeat-x;
 	margin: 0 auto;}
 
 
-.page-template-page-news-and-updates-php header.header{
-	box-shadow: none;
-}
+	.page-template-page-news-and-updates-php header.header{
+		box-shadow: none;
+	}
 	.page-template-page-news-and-updates-php div#main a{
 		margin-left: 10px;
 		margin-bottom: 10px;
@@ -270,6 +270,13 @@ background-repeat: repeat-x;
 	.google-maps-iframe iframe{
 		width: 100%;
 	}
+
+	.sub-content-item ul li{
+		list-style: disc;
+		font: 1.125em 'Merriweather', serif;
+		padding-bottom: 10px;
+	}
+
 	ol li {
 		list-style: decimal inside;
 		font: 1.125em 'Merriweather', serif;
