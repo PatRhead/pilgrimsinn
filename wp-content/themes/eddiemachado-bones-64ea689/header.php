@@ -40,9 +40,8 @@
 		<?php // end analytics ?>
 
 	</head>
-
 	<body <?php body_class(); ?>>
-
+<!-- Site designed by Wyatt Minton, Front-End Developed by Julie Brown and Backend-End Developed by Patrick Rhead -->
 		<div id="container">
 
 			<header class="header" role="banner">
